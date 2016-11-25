@@ -65,7 +65,7 @@ public class ControleComanda extends HttpServlet {
 				//instanciando o objeto comanda
 				Comanda comanda = new Comanda();
 				comanda.setNome(nome);
-				comanda.setData(data);
+				comanda.setDataInicio(data);
 				comanda.setStatus(status);
 				comanda.setValorTotal(valorTotal);
 				

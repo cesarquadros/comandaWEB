@@ -6,19 +6,20 @@ public class Comanda {
 
 	private Integer codComanda;
 	private String nome;
-	private Date data;
+	private Date dataInicio;
+	private Date dataFim;
 	private String status;
 	private float valorTotal;
 	
 	
 	
 	public Comanda() {
-		super();
+
 	}
 
 	public Comanda(String nome, Date data, String status, float valorTotal){
 		this.nome = nome;
-		this.data = data;
+		this.dataInicio = data;
 		this.status = status;
 		this.valorTotal = valorTotal;
 	}
@@ -38,15 +39,24 @@ public class Comanda {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	
-	public Date getData() {
-		return data;
+	public Date getDataInicio() {
+		return dataInicio;
 	}
-	
-	public void setData(Date data) {
-		this.data = data;
+
+	public void setDataInicio(Date dataInicio) {
+		this.dataInicio = dataInicio;
 	}
-	
+
+	public Date getDataFim() {
+		return dataFim;
+	}
+
+	public void setDataFim(Date dataFim) {
+		this.dataFim = dataFim;
+	}
+
 	public String getStatus() {
 		return status;
 	}

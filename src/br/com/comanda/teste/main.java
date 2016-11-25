@@ -2,6 +2,7 @@ package br.com.comanda.teste;
 
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 
 import br.com.comanda.entities.Comanda;
@@ -13,15 +14,21 @@ public class main {
 	
 	public static void main(String[] args) throws SQLException, ParseException {
 	
-		Conexao conexao = new Conexao();
+/*		Conexao conexao = new Conexao();
 		Comanda comanda = new Comanda();
 		comanda.setNome("Cesar");
 		comanda.setStatus("Aberto");
 		comanda.setValorTotal(0);
-		comanda.setData(ConverteData.getDataAtual());
+		comanda.setDataInicio(ConverteData.getDataAtual());
 		
 		ComandaDAO comandaDAO = new ComandaDAO();
 		comandaDAO.insert(comanda);
+*/
+		ComandaDAO comandaDAO = new ComandaDAO();
+		comandaDAO = new ComandaDAO();
+		ArrayList<Comanda> list = (ArrayList<Comanda>) comandaDAO.listAll();
+		comandaDAO.findById(1000);		
+		
 		
 	}
 }
