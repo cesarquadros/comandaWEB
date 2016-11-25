@@ -19,39 +19,47 @@ import javax.swing.table.DefaultTableModel;
 
 import br.com.comanda.entities.Comanda;
 import br.com.comanda.entities.Pagamento;
+import br.com.comanda.util.ConverteData;
 
 
 
 public class ComandaDAO extends Conexao {
-	private Connection con;
-	private Statement statement;
-	private ResultSet rs;
-	private String sql;
+
 	private DecimalFormat df = new DecimalFormat("0.00");
 
 	
-    public boolean abrirComanda(Comanda comanda) {
-        try {
-            con = abreConexao();
-            sql = "INSERT INTO COMANDA(NOME_CLIENTE, DATA_INICIO, STATUS) VALUES('"+comanda.getNome()+"','"+comanda.getData()+"','"+comanda.getStatus()+"')";
-            statement = con.createStatement();
-            statement.executeUpdate(sql);
-            return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
+    public boolean insert(Comanda comanda) {
+    	String sql = "insert comanda (nome_cliente, data_inicio, status, valor_total) values (?,?,?,?)";
+    	try {
+			abreConexao();
 
+    	stmt = con.prepareStatement(sql);
+    	
+    	stmt.setString(1,comanda.getNome());
+    	stmt.setString(2, ConverteData.dateToString(comanda.getData()));
+    	stmt.setString(3, comanda.getStatus());
+    	stmt.setFloat(3, comanda.getValorTotal());
+    	
+    	stmt.execute();
+    	stmt.close();
+    	con.close();
+    	return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+    }
+/*
 	public void atualizarComandas(JTable tabelaComanda, JLabel lblQtdComandas) throws SQLException {
 		DefaultTableModel model = (DefaultTableModel) tabelaComanda.getModel();
 		limparTabela(tabelaComanda);
 		try {
 			con = abreConexao();
-			statement = con.createStatement();
+			stmt = con.createStatement();
 
 			String sql = "SELECT COD_COMANDA, NOME_CLIENTE, STATUS, CONVERT(VARCHAR(10),DATA_INICIO,103) FROM COMANDA WHERE STATUS = 'ABERTO'";
-			rs = statement.executeQuery(sql);
+			rs = stmt.executeQuery(sql);
 			int qtdComandas = 0;
 			while (rs.next()) {
 				model.addRow(new String[] { rs.getString("COD_COMANDA"), rs.getString("NOME_CLIENTE"),
@@ -70,9 +78,9 @@ public class ComandaDAO extends Conexao {
 	public void fecharComanda(String numeroComanda, String status) throws SQLException {
 		try {
 			con = abreConexao();
-			statement = con.createStatement();
+			stmt = con.createStatement();
 			String sql = "UPDATE COMANDA SET STATUS ='" + status + "' WHERE COD_COMANDA = '" + numeroComanda + "'";
-			statement.executeUpdate(sql);
+			stmt.executeUpdate(sql);
 			
 						
 		} catch (SQLException e) {
@@ -116,9 +124,9 @@ public class ComandaDAO extends Conexao {
 		float valorApagar = 0;
 		try {
 			con = abreConexao();
-			statement = con.createStatement();
+			stmt = con.createStatement();
 			sql = "SELECT VALOR_PAGO FROM PAGAMENTOS WHERE COD_COMANDA ='" + codComanda + "'";
-			rs = statement.executeQuery(sql);
+			rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
 				valorApagar += rs.getFloat(1);
@@ -137,11 +145,11 @@ public class ComandaDAO extends Conexao {
 		
 		try {
 			con = abreConexao();
-			statement = con.createStatement();
+			stmt = con.createStatement();
 			
 			sql = "INSERT INTO PAGAMENTOS(COD_COMANDA, PAG_OBSERVACOES, VALOR_PAGO)"
 					+ "VALUES('"+pagamento.getCodComandao()+"','"+pagamento.getObservacaoPagamento()+"','"+pagamento.getValorPagamento()+"')";
-			statement.executeUpdate(sql);
+			stmt.executeUpdate(sql);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -158,10 +166,10 @@ public class ComandaDAO extends Conexao {
 		
 		try {
 			con = abreConexao();
-			statement = con.createStatement();
+			stmt = con.createStatement();
 			
 			sql = "SELECT PAG_OBSERVACOES, VALOR_PAGO FROM PAGAMENTOS WHERE COD_COMANDA = '"+codComanda+"'";
-			rs = statement.executeQuery(sql);
+			rs = stmt.executeQuery(sql);
 			
 			while(rs.next()){
 				Pagamento pagamento = new Pagamento();
@@ -182,7 +190,7 @@ public class ComandaDAO extends Conexao {
 		
 		try {
 			con = abreConexao();
-			statement = con.createStatement();
+			stmt = con.createStatement();
 			
 			sql = "SELECT"+
 					" P.DESCRICAO,P.PRECO, COUNT(*) AS CONT"+
@@ -196,7 +204,7 @@ public class ComandaDAO extends Conexao {
 					" IC.COD_COMANDA = '"+codComanda+"'"+
 					" GROUP BY"+ 
 					" P.DESCRICAO, P.PRECO";			
-			rs = statement.executeQuery(sql);
+			rs = stmt.executeQuery(sql);
 			
 			cabecalhoComprovante(textComprovante);
 
@@ -239,4 +247,5 @@ public class ComandaDAO extends Conexao {
 		textComprovante.setText(textComprovante.getText() +System.lineSeparator());
 		
 	}
+*/
 }

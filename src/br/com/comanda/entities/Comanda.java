@@ -4,9 +4,9 @@ import java.util.Date;
 
 public class Comanda {
 
-	private int codComanda;
+	private Integer codComanda;
 	private String nome;
-	private String data;
+	private Date data;
 	private String status;
 	private float valorTotal;
 	
@@ -16,7 +16,7 @@ public class Comanda {
 		super();
 	}
 
-	public Comanda(String nome, String data, String status, float valorTotal){
+	public Comanda(String nome, Date data, String status, float valorTotal){
 		this.nome = nome;
 		this.data = data;
 		this.status = status;
@@ -39,11 +39,11 @@ public class Comanda {
 		this.nome = nome;
 	}
 	
-	public String getData() {
+	public Date getData() {
 		return data;
 	}
 	
-	public void setData(String data) {
+	public void setData(Date data) {
 		this.data = data;
 	}
 	
