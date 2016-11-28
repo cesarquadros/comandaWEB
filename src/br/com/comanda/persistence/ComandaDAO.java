@@ -1,26 +1,10 @@
 package br.com.comanda.persistence;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.sql.Connection;
-import java.sql.ResultSet;
+
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
-import javax.swing.JLabel;
-import javax.swing.JTable;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-
 import br.com.comanda.entities.Comanda;
-import br.com.comanda.entities.Pagamento;
 import br.com.comanda.util.ConverteData;
 
 public class ComandaDAO extends Conexao {
