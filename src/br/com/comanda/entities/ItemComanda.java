@@ -1,10 +1,5 @@
 package br.com.comanda.entities;
 
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
-
-import br.com.comanda.persistence.ItemComandaDAO;
-import jdk.nashorn.internal.scripts.JO;
 
 public class ItemComanda{
 
@@ -12,6 +7,7 @@ public class ItemComanda{
 	private Produtos produtos;
 	private Comanda comanda;
 	
+
 	public ItemComanda(){
 		
 	}
@@ -44,6 +40,4 @@ public class ItemComanda{
 	public void setComanda(Comanda comanda) {
 		this.comanda = comanda;
 	}
-	
-	
 }

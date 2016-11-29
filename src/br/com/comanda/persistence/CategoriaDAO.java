@@ -1,49 +1,78 @@
 package br.com.comanda.persistence;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import javax.swing.JComboBox;
-
+import java.util.List;
 import br.com.comanda.entities.Categoria;
 
 public class CategoriaDAO extends Conexao {
 
-	private Connection con;
-	private Statement statement;
-	private ResultSet rs;
-	private String sql;
-
-	public ArrayList<Categoria> listarCategorias() {
-		ArrayList<Categoria> arrayCategoria = new ArrayList<>();
-
+	public List<Categoria> listAll() {
+		List<Categoria> listCategoria = new ArrayList<Categoria>();
+		Categoria categoria = null;
 		try {
 			con = abreConexao();
-			statement = con.createStatement();
 
-			sql = "SELECT * FROM CATEGORIAS";
-			rs = statement.executeQuery(sql);
 
+			String sql = "SELECT * FROM CATEGORIAS";
+			stmt = con.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			
 			while (rs.next()) {
-				String nomeCategoria = rs.getString(2);
-				int idCategoria = rs.getInt(1);
-
-				Categoria categoria = new Categoria(nomeCategoria, idCategoria);
-				arrayCategoria.add(categoria);
+				categoria = new Categoria();
+				categoria.setCodCategoria(rs.getInt("cod_categoria"));
+				categoria.setCategoria(rs.getString("categoria"));
+				listCategoria.add(categoria);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			try {
+				stmt.close();
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		}
-		return arrayCategoria;
+		return listCategoria;
+	}
+	
+	public Categoria findById(Integer idCategoria){
+		
+		Categoria categoria = null;
+		String sql = "select * from categorias where cod_categoria=?";
+		
+		try {
+			con = abreConexao();
+			stmt = con.prepareStatement(sql);
+			stmt.setInt(1, idCategoria);
+						
+			rs = stmt.executeQuery();
+			
+			while(rs.next()){
+				categoria = new Categoria();
+				categoria.setCodCategoria(rs.getInt("cod_categoria"));
+				categoria.setCategoria(rs.getString("categoria"));
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				stmt.close();
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+		return categoria;
 	}
 
-	public void preencherCombo(ArrayList<Categoria> arrayCategoria, JComboBox<String> comboCategoria) {
-		for (int i = 0; i < arrayCategoria.size(); i++) {
-			comboCategoria.addItem((arrayCategoria.get(i).getCategoria()));
-
-		}
-	}
 }

@@ -1,6 +1,8 @@
 package br.com.comanda.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Comanda {
 
@@ -10,11 +12,12 @@ public class Comanda {
 	private Date dataFim;
 	private String status;
 	private float valorTotal;
+	private List<ItemComanda> listItemComanda;
 	
 	
 	
 	public Comanda() {
-
+		this.listItemComanda = new ArrayList<ItemComanda>(); 
 	}
 
 	public Comanda(String nome, Date data, String status, float valorTotal){
@@ -22,6 +25,20 @@ public class Comanda {
 		this.dataInicio = data;
 		this.status = status;
 		this.valorTotal = valorTotal;
+	}
+	
+	
+	
+	public List<ItemComanda> getListItemComanda() {
+		return listItemComanda;
+	}
+
+	public void setListItemComanda(List<ItemComanda> listItemComanda) {
+		this.listItemComanda = listItemComanda;
+	}
+
+	public void addItem(ItemComanda item){
+		listItemComanda.add(item);
 	}
 	
 	public int getCodComanda() {
@@ -66,6 +83,9 @@ public class Comanda {
 	}
 	
 	public float getValorTotal() {
+		for (int i = 0; i < listItemComanda.size(); i++) {
+			valorTotal += listItemComanda.get(i).getProdutos().getPreco();
+		}
 		return valorTotal;
 	}
 	

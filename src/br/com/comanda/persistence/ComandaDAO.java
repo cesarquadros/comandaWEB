@@ -74,14 +74,14 @@ public class ComandaDAO extends Conexao {
 		return listaComanda;
 	}
 
-	public Comanda findById(Integer id){
+	public Comanda findById(Integer idComanda){
 		Comanda comanda = null;
 		try {
 			String sql = "select * from comanda where cod_comanda = ?";
 			
 			abreConexao();
 			stmt = con.prepareStatement(sql);
-			stmt.setInt(1, id);
+			stmt.setInt(1, idComanda);
 			
 			rs = stmt.executeQuery();
 
@@ -128,27 +128,7 @@ public class ComandaDAO extends Conexao {
 	}
 
 	/*
-	public static JTable getNewRenderedTable(final JTable table) {
-		table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
-			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
-					boolean hasFocus, int row, int col) {
-				super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
 
-				String status = (String) table.getModel().getValueAt(row, 2);
-
-				if (status.equalsIgnoreCase("ABERTO")) {
-					setForeground(new Color(34, 139, 34));
-				} else if (status.equalsIgnoreCase("FECHADO")) {
-					setForeground(Color.red);
-				} else if (status.equalsIgnoreCase("PENDENTE")) {
-					setForeground(Color.orange);
-				}
-
-				return this;
-			}
-		});
-		return table;
-	}
 
 	public float valorAPagar(int codComanda) throws SQLException { float
 	  valorApagar = 0; try { con = abreConexao(); stmt = con.createStatement();
