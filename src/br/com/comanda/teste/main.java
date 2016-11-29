@@ -6,8 +6,11 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import br.com.comanda.entities.Comanda;
+import br.com.comanda.entities.ItemComanda;
 import br.com.comanda.persistence.ComandaDAO;
 import br.com.comanda.persistence.Conexao;
+import br.com.comanda.persistence.ItemComandaDAO;
+import br.com.comanda.persistence.ProdutosDAO;
 import br.com.comanda.util.ConverteData;
 
 public class main {
@@ -23,11 +26,15 @@ public class main {
 		
 		ComandaDAO comandaDAO = new ComandaDAO();
 		comandaDAO.insert(comanda);
-*/
+
 		ComandaDAO comandaDAO = new ComandaDAO();
 		comandaDAO = new ComandaDAO();
 		ArrayList<Comanda> list = (ArrayList<Comanda>) comandaDAO.listAll();
 		comandaDAO.findById(1000);		
+*/
+		ItemComandaDAO itemComandaDAO = new ItemComandaDAO();
+		itemComandaDAO.findById(1000);
+		
 		
 		
 	}

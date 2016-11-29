@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DecimalFormat;
+import java.util.List;
+
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import br.com.comanda.entities.Produtos;
@@ -14,56 +16,50 @@ import br.com.comanda.entities.Produtos;
 public class ProdutosDAO extends Conexao{
 	private Connection con;
 	private Statement statement;
-	private ResultSet rs;
-	private String sql;
+
+
 	private DecimalFormat df = new DecimalFormat("0.00");
 	
 	
-	public boolean inserirProduto(Produtos produto) throws SQLException{
-		
-		try {
-			con = abreConexao();
-			statement = con.createStatement();
-			
-			sql = "INSERT INTO PRODUTOS(COD_CATEGORIA, DESCRICAO, PRECO, OBSERVACOES) "
-					+ "VALUES('"+produto.getCodCategoria()+"','"+produto.getDescricao()+"','"+produto.getPreco()+"','"+produto.getObservacoes()+"')";
-			statement.executeUpdate(sql);			
-			con.close();
-			return true;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public boolean inserirProduto(Produtos produto){
 
-		}
-		con.close();
 		return false;
 	}
 	
-	public void preecherTabela(JTable tabelaProdutos){
-		DefaultTableModel model = (DefaultTableModel) tabelaProdutos.getModel();
-		int linhas = model.getRowCount();
-		for(int i = 0; i<linhas; i++){
-			model.removeRow(0);
-		}
+	public Produtos findById(Integer idProduto){
 		
+		Produtos produtos = null;			
 		try {
+			String sql = "select * from produtos where cod_produto = ?";
+			
 			con = abreConexao();
-			statement = con.createStatement();
+			stmt = con.prepareStatement(sql);
+			stmt.setInt(1, idProduto);
 			
-			sql = "SELECT COD_PRODUTO,DESCRICAO, CATEGORIA, OBSERVACOES, PRECO "
-					+ "FROM PRODUTOS P "
-					+ "INNER JOIN CATEGORIAS C ON P.COD_CATEGORIA = C.COD_CATEGORIA";
-			rs = statement.executeQuery(sql);
-			
+			rs = stmt.executeQuery();
 
-			
-			while (rs.next()) {
-				model.addRow(new String[]{rs.getString(1),rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)});
-				
+			while(rs.next()){
+				produtos = new Produtos();
+				//produtos.setCategoria(categoria);
+				produtos.setCodProdutos(rs.getInt("cod_produto"));
+				produtos.setDescricao(rs.getString("descricao"));
+				produtos.setObservacoes(rs.getString("observacoes"));
+				produtos.setPreco(rs.getFloat("preco"));
 			}
+			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println(e);
 			e.printStackTrace();
+		}finally {
+			try {
+				stmt.close();
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
 		}
+
+		return produtos;
 	}
 }

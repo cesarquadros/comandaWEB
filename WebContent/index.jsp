@@ -2,6 +2,8 @@
 	pageEncoding="ISO-8859-1"%>
 	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<jsp:useBean class="br.com.comanda.managedbeans.ManagedBeanComanda" id="mb"></jsp:useBean>
 <!-- TagLibraries (JSTL) -->
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -55,8 +57,8 @@
 		</ul>
 
 		<ul class="tabs tabs-transparent">
-			<li class="tab"><a href="#test1">Test 1</a></li>
-			<li class="tab"><a class="active" href="#test2">Test 2</a></li>
+			<li class="tab"><a class="active" href="#test1">Comandas Abertas</a></li>
+			<li class="tab"><a href="#test2">Test 2</a></li>
 			<li class="tab disabled"><a href="#test3">Disabled Tab</a></li>
 			<li class="tab"><a href="#test4">Test 4</a></li>
 		</ul>
@@ -65,22 +67,16 @@
 	
 	<div id="test1" class="col s12" style="height: 50%;" >
 		<ul class="collapsible" data-collapsible="accordion" style="height: 50%">
+		<c:forEach items="${mb.listagemComandas}" var="comanda">
 			<li style="height: 50%">
 				<div class="collapsible-header" style="height: 50%">
-					<span class="new badge"></span><i class="material-icons"></i>Comanda
+					<span class="new badge"></span><i class="material-icons"></i>${comanda.nome}
 				</div>
 				<div class="collapsible-body">
 					<p>Item 1</p>
 				</div>
 			</li>
-						<li style="height: 50%">
-				<div class="collapsible-header" style="height: 50%">
-					<span class="new badge"></span><i class="material-icons"></i>Comanda2
-				</div>
-				<div class="collapsible-body">
-					<p>Item 1</p>
-				</div>
-			</li>
+			</c:forEach>
 		</ul>
 	</div>
 	

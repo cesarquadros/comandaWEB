@@ -4,14 +4,17 @@ package br.com.comanda.entities;
 public class Produtos {
 
 	private int codProdutos;
-	private int codCategoria;
+	private Categoria categoria;
 	private String descricao;
 	private float preco;
 	private String observacoes;
 	
+	public Produtos (){
+		
+	}
 	
-	public Produtos(int codCategoria, String descricao, float preco, String observacoes){
-		this.codCategoria = codCategoria;
+	public Produtos(Categoria categoria, String descricao, float preco, String observacoes){
+		this.categoria = categoria;
 		this.descricao = descricao;
 		this.preco = preco;
 		this.observacoes = observacoes;
@@ -25,14 +28,14 @@ public class Produtos {
 		this.codProdutos = codProdutos;
 	}
 	
-	public int getCodCategoria() {
-		return codCategoria;
+	public Categoria getCategoria() {
+		return categoria;
 	}
 
-	public void setCodCategoria(int codProdutos) {
-		this.codCategoria = codProdutos;
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
-	
+
 	public String getDescricao() {
 		return descricao;
 	}

@@ -6,19 +6,19 @@ import javax.swing.JTable;
 import br.com.comanda.persistence.ItemComandaDAO;
 import jdk.nashorn.internal.scripts.JO;
 
-public class ItemComanda extends ItemComandaDAO {
+public class ItemComanda{
 
 	private int codItem;
-	private int codProduto;
-	private int codComanda;
-	
-	public ItemComanda(int codProduto, int codComanda){
-		this.codProduto = codProduto;
-		this.codComanda = codComanda;
-	}
+	private Produtos produtos;
+	private Comanda comanda;
 	
 	public ItemComanda(){
 		
+	}
+	
+	public ItemComanda(Produtos produtos, Comanda comanda){
+		this.produtos = produtos;
+		this.comanda = comanda;
 	}
 	
 	public int getCodItem() {
@@ -28,20 +28,22 @@ public class ItemComanda extends ItemComandaDAO {
 	public void setCodItem(int codItem) {
 		this.codItem = codItem;
 	}
-	
-	public int getCoProduto() {
-		return codProduto;
+
+	public Produtos getProdutos() {
+		return produtos;
+	}
+
+	public void setProdutos(Produtos produtos) {
+		this.produtos = produtos;
+	}
+
+	public Comanda getComanda() {
+		return comanda;
+	}
+
+	public void setComanda(Comanda comanda) {
+		this.comanda = comanda;
 	}
 	
-	public void setCoProduto(int coProduto) {
-		this.codProduto = coProduto;
-	}
 	
-	public int getCodCoamnda() {
-		return codComanda;
-	}
-	
-	public void setCodCoamnda(int codComanda) {
-		this.codComanda = codComanda;
-	}	
 }
