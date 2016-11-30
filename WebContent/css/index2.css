@@ -1,0 +1,28 @@
+#data{
+	width: 200px;
+	font-size: 12pt;
+}
+span.badge.new:after{
+	content:""
+}
+#btnExcluir{
+	float: right;
+	height: 30px;
+	background: blue;
+}
+
+#test1{
+	width: 80%;
+	margin: auto;
+}
+#itens{
+	background: #D3D3D3;
+	padding: 0px;
+}
+
+label.lbls{
+	font-size: 11pt;
+}
+#lblTotal{
+	float: right;
+}
