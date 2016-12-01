@@ -5,24 +5,28 @@
 span.badge.new:after{
 	content:""
 }
-#btnExcluir{
-	float: right;
-	height: 30px;
-	background: blue;
+button#btnEx{
+	height: 25px;
 }
-
 #test1{
 	width: 80%;
 	margin: auto;
 }
 #itens{
-	background: #D3D3D3;
+	background: white;
 	padding: 0px;
 }
 
 label.lbls{
 	font-size: 11pt;
 }
+label.lbls.itens{
+	margin-left: 20px;
+}
 #lblTotal{
 	float: right;
+}
+
+#testeLista{
+	display: block;	
 }

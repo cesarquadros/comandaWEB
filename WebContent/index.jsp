@@ -3,8 +3,8 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<jsp:useBean class="br.com.comanda.managedbeans.ManagedBeanComanda"
-	id="mb"></jsp:useBean>
+<jsp:useBean class="br.com.comanda.managedbeans.ManagedBeanComanda" id="mb"></jsp:useBean>
+<jsp:useBean class="br.com.comanda.managedbeans.ManagedBeanProduto" id="mb2"></jsp:useBean>
 <!-- TagLibraries (JSTL) -->
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -26,9 +26,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" type="text/css" href="css/index.css" />
-<link rel="stylesheet" type="text/css" href="css/index.css" />
-
+<link rel="stylesheet" type="text/css" href="css/index2.css" />
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/easports/css/bootstrap-theme.min.css" />
@@ -43,13 +41,11 @@
 </head>
 
 <body id="corpo">
-
-	<div id="corpo2">
 		<!--Import jQuery before materialize.js-->
 		<script type="text/javascript"
 			src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 		<script type="text/javascript" src="js/materialize.min.js"></script>
-		<!-- ---------------------------------------------------------------------------- -->
+<!-- ---------------------------------------------------------------------------- -->
 
 		<div style="width: 100%; margin: auto; margin-top: 5px;">
 			<nav class="nav-extended" style="background: rgb(0,150,136);"
@@ -70,73 +66,23 @@
 				</ul>
 
 				<ul class="tabs tabs-transparent">
-					<li class="tab"><a class="active" href="#test1">Comandas
-							Abertas</a></li>
+					<li class="tab"><a class="active" href="#test1">Comandas Abertas</a></li>
 					<li class="tab"><a href="#test2">Test 2</a></li>
-					<li class="tab disabled"><a href="#test3">Disabled Tab</a></li>
-					<li class="tab"><a href="#test4">Test 4</a></li>
+					<li class="tab"><a href="#test3">Test 4</a></li>
 				</ul>
 			</div>
 			</nav>
-			
+<!-- ABA 1------------------------------------------------------------------------------------------------------------------------------------------------------ -->			
 			<div id="test1" class="col s12">
-			<!-- ------------------------------------------------------------------------------------------------------------------------------------------------------ -->
-			<ul class="collapsible" data-collapsible="accordion">
-			  <c:forEach items="${mb.listagemComandas}" var="comanda">
-			  <li>			  
-			    <div class="collapsible-header" id=""><i class="small material-icons">perm_identity</i>
-				    <label class="lbls">${comanda.nome}</label>
-				    <label class="lbls" id="lblTotal">Valor Total: R$ ${comanda.valorTotal}</label>
-			    </div>	
-			    
-			    <div class="collapsible-body" id="itens">
-					<p>
-						<button type="button" class="btn btn-danger btn-xs" id="btnAdd">Adicionar Produtos</button>
-						<button type="button" class="btn btn-warning btn-xs" id="btnFechar">Fechar Comanda</button>
-						<button type="button" class="btn btn-sucess btn-xs" id="btnPag">Efetuar Pagamentos</button>
-					</p>
-					<table>
-			        <thead>
-			          <tr>
-			              <th data-field="id">Produto</th>
-			              <th data-field="name">Categoria</th>
-			              <th data-field="price">Preço</th>
-			               <th data-field="price"></th>
-			          </tr>
-			        </thead>
-			        
-			        <tbody>
-
-			    <c:forEach items="${comanda.listItemComanda}" var="item">    
-						<tr>
-					
-						 <td><label class="lbls">${item.produtos.descricao}</label> </td>
-						 <td><label class="lbls">${item.produtos.categoria.categoria}</label></td>
-						 <td><label class="lbls">${item.produtos.preco}</label></td>
-						 <td><button type="button" class="btn btn-danger btn-xs" id="btnExcluir">X</button></td>
-						 </tr>
-					
-			  </c:forEach>
-
-			        </tbody>     				 
-				 </table>
-				</div>	
-					
-				
-				 		    
-
-			   
-			 	
-			  		
-			  </li>
-			  </c:forEach>
-			</ul>
-			<!-- ------------------------------------------------------------------------------------------------------------------------------------------------------ -->
+				<jsp:include page="comandas.jsp"></jsp:include>
 			</div>
-			<div id="test2" class="col s12">Test 2</div>
-			<div id="test3" class="col s12">Test 3</div>
-			<div id="test4" class="col s12">Test 4</div>
+<!-- ABA 2------------------------------------------------------------------------------------------------------------------------------------------------------ -->
+			<div id="test2" class="col s12">
+				<jsp:include page="produtos.jsp"></jsp:include>
+			</div>
+<!-- ------------------------------------------------------------------------------------------------------------------------------------------------------ -->
+			<div id="test3" class="col s12">Test 4</div>
 		</div>
-	</div>
+
 </body>
 </html>

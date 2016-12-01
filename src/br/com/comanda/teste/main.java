@@ -43,11 +43,14 @@ public class main {
 		
 		ProdutosDAO p = new ProdutosDAO();
 		p.findById(117);
-*/
 
 		ManagedBeanComanda mb = new ManagedBeanComanda();
 		mb.getListagemComandas();
 		Comanda comanda = new Comanda();
 		comanda.getListItemComanda();
+		*/
+		
+		ProdutosDAO p = new ProdutosDAO();
+		p.listAll();
 	}
 }
