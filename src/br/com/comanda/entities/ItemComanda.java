@@ -4,7 +4,7 @@ package br.com.comanda.entities;
 public class ItemComanda{
 
 	private int codItem;
-	private Produtos produtos;
+	private Produto produtos;
 	private Comanda comanda;
 	
 
@@ -12,7 +12,7 @@ public class ItemComanda{
 		
 	}
 	
-	public ItemComanda(Produtos produtos, Comanda comanda){
+	public ItemComanda(Produto produtos, Comanda comanda){
 		this.produtos = produtos;
 		this.comanda = comanda;
 	}
@@ -25,11 +25,11 @@ public class ItemComanda{
 		this.codItem = codItem;
 	}
 
-	public Produtos getProdutos() {
+	public Produto getProdutos() {
 		return produtos;
 	}
 
-	public void setProdutos(Produtos produtos) {
+	public void setProdutos(Produto produtos) {
 		this.produtos = produtos;
 	}
 

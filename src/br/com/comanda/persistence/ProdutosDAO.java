@@ -4,18 +4,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.comanda.entities.Produtos;
+import br.com.comanda.entities.Produto;
 
 public class ProdutosDAO extends Conexao {
 
-	public boolean inserirProduto(Produtos produto) {
+	public boolean inserirProduto(Produto produto) {
 
 		return false;
 	}
 
-	public Produtos findById(Integer idProduto) {
+	public Produto findById(Integer idProduto) {
 
-		Produtos produtos = null;
+		Produto produtos = null;
 		CategoriaDAO categoria = new CategoriaDAO();
 
 		try {
@@ -28,7 +28,7 @@ public class ProdutosDAO extends Conexao {
 			rs = stmt.executeQuery();
 
 			while (rs.next()) {
-				produtos = new Produtos();
+				produtos = new Produto();
 				produtos.setCategoria(categoria.findById(rs.getInt("cod_categoria")));
 				produtos.setCodProdutos(rs.getInt("cod_produto"));
 				produtos.setDescricao(rs.getString("descricao"));
@@ -52,12 +52,12 @@ public class ProdutosDAO extends Conexao {
 		return produtos;
 	}
 
-	public List<Produtos> listAll() {
+	public List<Produto> listAll() {
 		
-		List<Produtos> listProdutos = new ArrayList<Produtos>();
+		List<Produto> listProdutos = new ArrayList<Produto>();
 		
 		try {			
-			Produtos produtos = null;	
+			Produto produtos = null;	
 			CategoriaDAO categoria = new CategoriaDAO();
 			
 			String sql = "select * from produtos";
@@ -67,7 +67,7 @@ public class ProdutosDAO extends Conexao {
 			rs = stmt.executeQuery();
 			
 			while(rs.next()){
-				produtos = new Produtos();
+				produtos = new Produto();
 				produtos.setCategoria(categoria.findById(rs.getInt("cod_categoria")));
 				produtos.setCodProdutos(rs.getInt("cod_produto"));
 				produtos.setDescricao(rs.getString("descricao"));

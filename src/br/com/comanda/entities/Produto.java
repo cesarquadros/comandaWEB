@@ -1,7 +1,7 @@
 package br.com.comanda.entities;
 
 
-public class Produtos {
+public class Produto {
 
 	private int codProdutos;
 	private Categoria categoria;
@@ -9,11 +9,11 @@ public class Produtos {
 	private float preco;
 	private String observacoes;
 	
-	public Produtos (){
+	public Produto (){
 		
 	}
 	
-	public Produtos(Categoria categoria, String descricao, float preco, String observacoes){
+	public Produto(Categoria categoria, String descricao, float preco, String observacoes){
 		this.categoria = categoria;
 		this.descricao = descricao;
 		this.preco = preco;
