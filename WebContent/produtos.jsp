@@ -44,22 +44,23 @@
 	}
 	</script>
 	
-	
+
 	<div class="container" style="margin-left: 30px;">
 		<h2>Produtos</h2>
 		
+	<form class="col s12" name="formulario" method="post" action="ServletComanda?acao=cadastrarproduto">
 	<div class="row">
-	    <div class="input-field col s6">
+	    <div class="input-field col s6" style="width: 350px;">
 	      <input id="first_name2" type="text" class="validate">
 	      <label class="active" for="first_name2">Produto</label>
 	    </div>
 
-	    <div class="input-field col s6">
+	    <div class="input-field col s6" style="width: 350px;">
 	      <input id="first_name2" type="text" class="validate">
 	      <label class="active" for="first_name2">Preço</label>
 	    </div>
 
-		  <div class="input-field col s12">
+		  <div class="input-field col s12" style="width: 300px;">
 		    <select>
 		      <option value="" disabled selected>Escolha uma categoria</option>
 		      <c:forEach items="${mbC.listagemCategoria}" var="categoria">
@@ -67,12 +68,12 @@
 		      </c:forEach>
 		    </select>
 		  </div>	    
-	    
-	</div>	
+	</div>
 	
+	<input type="submit" class="waves-effect waves-light btn" value="Salvar"/>	
+	</form>  
   
-  
-		<br/><br/><br/><br/><br/><br/>
+		<br/><br/>
 		<table class="table table-hover highlight responsive-table" id="dataTables-example">
 			<thead>
 				<tr>

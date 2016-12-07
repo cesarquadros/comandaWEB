@@ -22,7 +22,8 @@ public class ControleComanda extends HttpServlet {
     }
 
 	@Override
-	protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
+			throws ServletException, IOException {
 		try {
 			execute(request, response);
 		} catch (ParseException e) {
@@ -32,7 +33,8 @@ public class ControleComanda extends HttpServlet {
 	}
 
 	@Override
-	protected void doPost(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
+			throws ServletException, IOException {
 		try {
 			execute(request, response);
 		} catch (ParseException e) {
