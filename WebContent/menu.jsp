@@ -1,27 +1,18 @@
 
-
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Controle de Comandas</a>
+<html>
+<link rel="stlesheet" href="css/menu.css">
+</head>
+<body>
+ <nav>
+    <div class="nav-wrapper" id="menu" style="background: gray;">
+      <a href="index.jsp" class="brand-logo right">Logo</a>
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li><a href="comandas.jsp">Comandas</a></li>
+        <li><a href="produtos.jsp">Produtos</a></li>
+        <li><a href="#">Relatorios</a></li>
+      </ul>
     </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="#">Produtos</a></li>
-      <li><a href="#">Relatórios</a></li>
-    </ul>
-    <form class="navbar-form navbar-left">
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search">
-        <div class="input-group-btn">
-          <button class="btn btn-default" type="submit">
-            <i class="glyphicon glyphicon-search"></i>
-          </button>
-        </div>
-      </div>
-    </form>
-  </div>
-</nav>
-
+  </nav>
+</head>
 
 
