@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,9 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.com.comanda.entities.Categoria;
 import br.com.comanda.entities.Comanda;
+import br.com.comanda.entities.ItemComanda;
 import br.com.comanda.entities.Produto;
 import br.com.comanda.persistence.CategoriaDAO;
 import br.com.comanda.persistence.ComandaDAO;
+import br.com.comanda.persistence.ItemComandaDAO;
 import br.com.comanda.persistence.ProdutosDAO;
 import br.com.comanda.util.ConverteData;
 
@@ -92,7 +96,7 @@ public class ControleComanda extends HttpServlet {
 					request.getRequestDispatcher("produtos.jsp").forward(request, response);
 				}
 
-			} else if (acao.equals("cadastrarproduto")) {
+			} else if (acao.equalsIgnoreCase("cadastrarproduto")) {
 
 				try {
 					Integer idCategoria = Integer.parseInt(request.getParameter("idCategoria"));
@@ -113,7 +117,7 @@ public class ControleComanda extends HttpServlet {
 					ProdutosDAO produtosDAO = new ProdutosDAO();
 					produtosDAO.insert(produto);
 
-					request.setAttribute("mensagem", "Produto cadastrado");	
+					request.setAttribute("mensagem", "Produto cadastrado");
 				} catch (SQLException e) {
 					String erro = e.getMessage();
 					request.setAttribute("mensagem2", "OPS! Ocorreu um erro: " + erro);
@@ -121,6 +125,36 @@ public class ControleComanda extends HttpServlet {
 					request.getRequestDispatcher("produtos.jsp").forward(request, response);
 				}
 
+			} else if (acao.equalsIgnoreCase("detalhescomanda")) {				
+
+				try {
+					Integer idComanda = Integer.parseInt(request.getParameter("id"));
+
+					ItemComandaDAO itemComandaDAO = new ItemComandaDAO();
+
+					List<ItemComanda> lista = itemComandaDAO.findById(idComanda);
+					
+					request.setAttribute("listaItens", lista);
+					request.setAttribute("id", idComanda);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}finally {
+					request.getRequestDispatcher("detalhecomanda.jsp").forward(request, response);
+				}
+
+			} else if(acao.equalsIgnoreCase("adicionaritem")){
+				
+				String acao2 = request.getParameter("action=2");
+				Integer idComanda = Integer.parseInt(request.getParameter("id"));
+								
+				if(acao2.equalsIgnoreCase("1") || !acao2.equals(null)){
+					request.setAttribute("id", idComanda);
+					request.getRequestDispatcher("incluirprodutos.jsp").forward(request, response);
+				}else{
+					Integer codProduto = Integer.parseInt(request.getParameter("codProduto"));
+				}
+				
 			}
 		}
 	}
