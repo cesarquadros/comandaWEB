@@ -22,8 +22,7 @@ public class ComandaDAOTest {
 		comanda.setDataInicio(ConverteData.getDataAtual());
 		
 		ComandaDAO comandaDAO = new ComandaDAO();
-		boolean teste = comandaDAO.insert(comanda);
-		Assert.assertEquals(true, teste);
+		comandaDAO.insert(comanda);
 		
 	}
 	

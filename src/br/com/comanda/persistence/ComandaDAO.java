@@ -9,9 +9,9 @@ import br.com.comanda.util.ConverteData;
 
 public class ComandaDAO extends Conexao {
 
-	public boolean insert(Comanda comanda) {
+	public void insert(Comanda comanda) throws SQLException {
 		String sql = "insert comanda (nome_cliente, data_inicio, status, valor_total) values (?,?,?,?)";
-		try {
+
 			abreConexao();
 
 			stmt = con.prepareStatement(sql);
@@ -20,21 +20,8 @@ public class ComandaDAO extends Conexao {
 			stmt.setString(2, ConverteData.dateToString(comanda.getDataInicio()));
 			stmt.setString(3, comanda.getStatus());
 			stmt.setFloat(4, comanda.getValorTotal());
-
-			return true;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		} finally {
-			try {
-				stmt.close();
-				con.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+			
+			stmt.execute();
 	}
 
 	public List<Comanda> listAll() {

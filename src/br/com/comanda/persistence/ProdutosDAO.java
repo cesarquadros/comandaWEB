@@ -8,9 +8,19 @@ import br.com.comanda.entities.Produto;
 
 public class ProdutosDAO extends Conexao {
 
-	public boolean inserirProduto(Produto produto) {
-
-		return false;
+	public void insert(Produto produto) throws SQLException {
+		
+		String sql = "insert PRODUTOS(cod_categoria, descricao, preco, observacoes)values (?,?,?,?)";
+		
+		con = abreConexao();
+		stmt = con.prepareStatement(sql);
+		stmt.setInt(1, produto.getCategoria().getCodCategoria());
+		stmt.setString(2, produto.getDescricao());
+		stmt.setFloat(3, produto.getPreco());
+		stmt.setString(4, produto.getObservacoes());
+		
+		stmt.execute();
+		
 	}
 
 	public Produto findById(Integer idProduto) {

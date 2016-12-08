@@ -32,7 +32,7 @@
 
 
 </head>
-<body>
+<body style="padding: 0px;">
 
 	<jsp:include page="menu.jsp"></jsp:include>
 
@@ -42,39 +42,47 @@
 		    $('select').material_select();
 		});
 	}
-	</script>
-	
+	</script>	
 
-	<div class="container" style="margin-left: 30px;">
-		<h2>Produtos</h2>
-		
-	<form class="col s12" name="formulario" method="post" action="ServletComanda?acao=cadastrarproduto">
-	<div class="row">
-	    <div class="input-field col s6" style="width: 350px;">
-	      <input id="first_name2" type="text" class="validate">
+
+	<h2 style="margin: auto; text-align: center; font-family: serif;">Produtos</h2>
+	<div style="margin: auto; width: 95%;">
+				
+	<form class="col s12" name="formulario" method="post" action="ServletComanda?acao=cadastrarproduto" style="width: 25%; float: left;" >
+	<div class="row" style="width: 400px;">
+	    <div class="input-field col s6" style="width: 250px;">
+	      <input id="first_name2" type="text" class="validate" name="descricao" required>
 	      <label class="active" for="first_name2">Produto</label>
 	    </div>
 
-	    <div class="input-field col s6" style="width: 350px;">
-	      <input id="first_name2" type="text" class="validate">
-	      <label class="active" for="first_name2">Preço</label>
+	    <div class="input-field col s6" style="width: 250px;">
+	      <input id="first_name2" type="text" class="validate" name="preco" required>
+	      <label class="active" for="first_name2" >Preço</label>
 	    </div>
-
-		  <div class="input-field col s12" style="width: 300px;">
-		    <select>
+	     </div>
+		<div class="row" style="width: 400px;">
+		  <div class="input-field col s12" style="width: 250px;">
+		    <select name="idCategoria" required>
 		      <option value="" disabled selected>Escolha uma categoria</option>
 		      <c:forEach items="${mbC.listagemCategoria}" var="categoria">
 		      		<option value="${categoria.codCategoria }"> ${categoria.categoria} </option>
 		      </c:forEach>
 		    </select>
-		  </div>	    
+		  </div>
+		  
+	    <div class="input-field col s6" style="width: 250px;">
+	      <input id="first_name2" type="text" class="validate" name="observacoes" required>
+	      <label class="active" for="first_name2" >Observações</label>
+	    </div>		  	    
 	</div>
 	
 	<input type="submit" class="waves-effect waves-light btn" value="Salvar"/>	
 	</form>  
   
-		<br/><br/>
-		<table class="table table-hover highlight responsive-table" id="dataTables-example">
+  		<h4 style="color: green";> ${mensagem} </h4> <h4 style="color: red";> ${mensagem2} </h4>
+		<br/>
+		<div style="overflow: scroll; width: 75%; height: 500px;">
+		<table class="table table-hover highlight responsive-table bordered" id="dataTables-example" >
 			<thead>
 				<tr>
 					<th>ID Produto</th>
@@ -85,7 +93,9 @@
 				</tr>
 			</thead>
 			<tbody>
+
 				<c:forEach items="${mb.listagemProdutos}" var="produto">
+
 				<tr>
 					<td>${produto.codProdutos}</td>
 					<td>${produto.descricao}</td>
@@ -93,9 +103,13 @@
 					<td>${produto.observacoes}</td>
 					<td>R$ ${produto.preco}</td>
 				</tr>
+
 					</c:forEach>
+
 			</tbody>
+							
 		</table>
+			</div>
 	</div>
 	  
 </body>
