@@ -125,7 +125,7 @@ public class ControleComanda extends HttpServlet {
 					request.getRequestDispatcher("produtos.jsp").forward(request, response);
 				}
 
-			} else if (acao.equalsIgnoreCase("detalhescomanda")) {				
+			} else if (acao.equalsIgnoreCase("detalhescomanda")) {
 
 				try {
 					Integer idComanda = Integer.parseInt(request.getParameter("id"));
@@ -133,28 +133,44 @@ public class ControleComanda extends HttpServlet {
 					ItemComandaDAO itemComandaDAO = new ItemComandaDAO();
 
 					List<ItemComanda> lista = itemComandaDAO.findById(idComanda);
-					
+
 					request.setAttribute("listaItens", lista);
 					request.setAttribute("id", idComanda);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}finally {
+				} finally {
 					request.getRequestDispatcher("detalhecomanda.jsp").forward(request, response);
 				}
 
-			} else if(acao.equalsIgnoreCase("adicionaritem")){
-				
-				String acao2 = request.getParameter("action=2");
+			} else if (acao.equalsIgnoreCase("adicionaritem")) {
+
 				Integer idComanda = Integer.parseInt(request.getParameter("id"));
-								
-				if(acao2.equalsIgnoreCase("1") || !acao2.equals(null)){
-					request.setAttribute("id", idComanda);
-					request.getRequestDispatcher("incluirprodutos.jsp").forward(request, response);
-				}else{
-					Integer codProduto = Integer.parseInt(request.getParameter("codProduto"));
+				Integer codProduto = Integer.parseInt(request.getParameter("prod"));
+				Integer quantidade = Integer.parseInt(request.getParameter("quantidade"));		
+				
+				ItemComanda itemComanda = new ItemComanda();
+				
+				ComandaDAO comandaDAO = new ComandaDAO();
+				ProdutosDAO produtosDAO = new ProdutosDAO();
+				ItemComandaDAO itemComandaDAO = new ItemComandaDAO();
+				
+				Comanda comanda = comandaDAO.findById(idComanda);
+				Produto produto = produtosDAO.findById(codProduto);
+				
+				itemComanda.setComanda(comanda);
+				itemComanda.setProdutos(produto);
+				
+				for(int i = 0; i < quantidade; i++){
+					
 				}
 				
+
+			} else if (acao.equalsIgnoreCase("paginaitens")) {
+
+				Integer idComanda = Integer.parseInt(request.getParameter("id"));
+				request.setAttribute("id", idComanda);
+				request.getRequestDispatcher("incluirprodutos.jsp").forward(request, response);
 			}
 		}
 	}

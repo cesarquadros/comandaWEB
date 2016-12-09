@@ -1,15 +1,8 @@
 package br.com.comanda.persistence;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 import br.com.comanda.entities.ItemComanda;
 
 public class ItemComandaDAO extends Conexao{
@@ -63,5 +56,16 @@ public class ItemComandaDAO extends Conexao{
 		}
 		con.close();
 		return listaItem;
+	}
+	
+	public void inserir(ItemComanda itemComanda) throws SQLException{
+		
+		String sql = "insert itens_comanda(cod_produto, cod_comanda)values(?,?)";
+		abreConexao();
+		
+		stmt = con.prepareStatement(sql);
+		stmt.setInt(1, itemComanda.getProdutos().getCodProdutos());
+		stmt.setInt(2, itemComanda.getComanda().getCodComanda());
+		stmt.executeQuery();
 	}
 }
