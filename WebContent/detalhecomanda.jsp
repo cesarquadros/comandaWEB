@@ -53,7 +53,7 @@
 	Comanda: ${id}
 </div>
 
-	<h2 style="margin: auto; text-align: center; font-family: serif;">Produtos</h2>
+	<h2 style="margin: auto; text-align: center; font-family: serif;">Detalhes da Comanda</h2>
 	<div style="margin: auto; width: 95%;">
 
 
@@ -80,11 +80,8 @@
 							<td>${itens.produtos.descricao}</td>
 							<td>R$ ${itens.produtos.preco}</td>
 						</tr>
-
 					</c:forEach>
-
 				</tbody>
-
 			</table>
 		</div>
 	</div>

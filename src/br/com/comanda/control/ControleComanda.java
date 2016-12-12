@@ -146,25 +146,37 @@ public class ControleComanda extends HttpServlet {
 			} else if (acao.equalsIgnoreCase("adicionaritem")) {
 
 				Integer idComanda = Integer.parseInt(request.getParameter("id"));
-				Integer codProduto = Integer.parseInt(request.getParameter("prod"));
-				Integer quantidade = Integer.parseInt(request.getParameter("quantidade"));		
+				Integer codProduto = Integer.parseInt(request.getParameter("produto"));
+				Integer qtd = Integer.parseInt(request.getParameter("qtd"));
 				
-				ItemComanda itemComanda = new ItemComanda();
-				
-				ComandaDAO comandaDAO = new ComandaDAO();
-				ProdutosDAO produtosDAO = new ProdutosDAO();
-				ItemComandaDAO itemComandaDAO = new ItemComandaDAO();
-				
-				Comanda comanda = comandaDAO.findById(idComanda);
-				Produto produto = produtosDAO.findById(codProduto);
-				
-				itemComanda.setComanda(comanda);
-				itemComanda.setProdutos(produto);
-				
-				for(int i = 0; i < quantidade; i++){
+				try {
 					
+					ItemComanda itemComanda = new ItemComanda();
+
+					ComandaDAO comandaDAO = new ComandaDAO();
+					ProdutosDAO produtosDAO = new ProdutosDAO();
+					ItemComandaDAO itemComandaDAO = new ItemComandaDAO();
+
+					Comanda comanda = comandaDAO.findById(idComanda);
+					Produto produto = produtosDAO.findById(codProduto);
+
+					itemComanda.setComanda(comanda);
+					itemComanda.setProdutos(produto);
+
+					for (int i = 0; i < qtd; i++) {
+
+						itemComandaDAO.inserir(itemComanda);
+					}
+					
+					request.setAttribute("mensagem", "Produto adicionado a comanda " + idComanda);
+					request.setAttribute("id", idComanda);
+					
+				} catch (SQLException e) {
+					request.setAttribute("mensagem", e);
+					request.setAttribute("id", idComanda);					
+				}finally {
+					request.getRequestDispatcher("incluirprodutos.jsp").forward(request, response);
 				}
-				
 
 			} else if (acao.equalsIgnoreCase("paginaitens")) {
 

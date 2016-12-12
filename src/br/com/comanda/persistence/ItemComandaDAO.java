@@ -7,7 +7,17 @@ import br.com.comanda.entities.ItemComanda;
 
 public class ItemComandaDAO extends Conexao{
 
-
+	
+	public void inserir(ItemComanda itemComanda) throws SQLException{
+		
+		String sql = "insert itens_comanda(cod_produto, cod_comanda)values(?,?)";
+		
+		abreConexao();		
+		stmt = con.prepareStatement(sql);
+		stmt.setInt(1, itemComanda.getProdutos().getCodProdutos());
+		stmt.setInt(2, itemComanda.getComanda().getCodComanda());
+		stmt.execute();
+	}
 	
 	public boolean excluirItemComanda(int codItem){
 		try {
@@ -57,15 +67,5 @@ public class ItemComandaDAO extends Conexao{
 		con.close();
 		return listaItem;
 	}
-	
-	public void inserir(ItemComanda itemComanda) throws SQLException{
-		
-		String sql = "insert itens_comanda(cod_produto, cod_comanda)values(?,?)";
-		abreConexao();
-		
-		stmt = con.prepareStatement(sql);
-		stmt.setInt(1, itemComanda.getProdutos().getCodProdutos());
-		stmt.setInt(2, itemComanda.getComanda().getCodComanda());
-		stmt.executeQuery();
-	}
+
 }

@@ -64,10 +64,8 @@
 		<div id="cerveja" class="col s12">
 			<br /> <br />
 			<div style="margin: auto; width: 100%;">
-				<div style="overflow: auto; width: 100%; height: 500px;">
-					<table
-						class="table table-hover highlight responsive-table bordered"
-						id="dataTables-example">
+				<div style="overflow: auto; width: 100%; height: 500px;border-top: solid 1px black">
+					<table class="table table-hover highlight responsive-table bordered" id="dataTables-example">
 						<thead>
 							<tr>
 								<th>Codigo</th>
@@ -79,6 +77,7 @@
 						</thead>
 						<tbody>
 							<c:forEach items="${mb.listagemProdutos}" var="produto">
+							<form name="formulario" method="post" action="ServletComanda?acao=adicionaritem&id=${id}&produto=${produto.codProdutos}">
 								<c:if test="${produto.categoria.codCategoria=='1'}">
 									<tr>
 										<td><label id="codProduto">${produto.codProdutos}</label></td>
@@ -86,23 +85,19 @@
 										<td>${produto.observacoes}</td>
 										<td>R$ ${produto.preco}</td>
 										<td style="width: 30px;">
-											<div class="input-field col s6" style="width: 250px;">
+											<div class="input-field col s6" style="width: 100px;">
 												<input id="quantidade" type="number" class="validate"
-													name="preco" required> <label class="active"
+													name="qtd" required> <label class="active"
 													for="first_name2">QTD</label>
 											</div>
 										</td>
-
-										<td><a href="#"
-											onclick="this.href='ServletComanda?acao=adicionaritem&quantidade='+document.getElementById('quantidade').value+'&id='+document.getElementById('idcomanda').textContent+'&prod='+document.getElementById('codProduto').textContent"
-											class="btn btn-sm"
+ 
+										<td><input type="submit" id="add" value="Adicionar"class="btn btn-sm"
 											style="background-color: #ffc8a4; font-size: 14; color: black; border-color: black; margin-left: 10px">
-
-												<span class="glyphicon glyphicon-search" aria-hidden="true"
-												style="margin-right: 5px"></span>Adicionar
-										</a></td>
+									</td>
 									</tr>
 								</c:if>
+								</form>
 							</c:forEach>
 						</tbody>
 					</table>
@@ -127,7 +122,9 @@
 						<tbody>
 
 							<c:forEach items="${mb.listagemProdutos}" var="produto">
+							<form name="formulario" method="post" action="ServletComanda?acao=adicionaritem&id=${id}&produto=${produto.codProdutos}">
 								<c:if test="${produto.categoria.codCategoria=='2'}">
+															
 									<tr>
 										<td><label id="codProduto2">${produto.codProdutos}</label></td>
 										<td>${produto.descricao}</td>
@@ -136,21 +133,17 @@
 										<td style="width: 30px;">
 											<div class="input-field col s6" style="width: 250px;">
 												<input id="quantidade2" type="number" class="validate"
-													name="preco" required> <label class="active"
+													name="qtd" required> <label class="active"
 													for="first_name2">QTD</label>
 											</div>
 										</td>
 
-										<td><a href="#"
-											onclick="this.href='ServletComanda?acao=adicionaritem&quantidade='+document.getElementById('quantidade2').value+'&id='+document.getElementById('idcomanda').textContent+'&prod='+document.getElementById('codProduto2').textContent"
-											class="btn btn-sm"
+										<td><input type="submit" id="add" value="Adicionar"class="btn btn-sm"
 											style="background-color: #ffc8a4; font-size: 14; color: black; border-color: black; margin-left: 10px">
-
-												<span class="glyphicon glyphicon-search" aria-hidden="true"
-												style="margin-right: 5px"></span>Adicionar
-										</a></td>
+									</td>
 									</tr>
 								</c:if>
+								</form>
 							</c:forEach>
 						</tbody>
 					</table>
@@ -175,6 +168,7 @@
 						<tbody>
 
 							<c:forEach items="${mb.listagemProdutos}" var="produto">
+								<form name="formulario" method="post" action="ServletComanda?acao=adicionaritem&id=${id}&produto=${produto.codProdutos}">
 								<c:if test="${produto.categoria.codCategoria=='3'}">
 									<tr>
 										<td><label id="codProduto3">${produto.codProdutos}</label></td>
@@ -184,21 +178,17 @@
 										<td style="width: 30px;">
 											<div class="input-field col s6" style="width: 250px;">
 												<input id="quantidade3" type="number" class="validate"
-													name="preco" required> <label class="active"
+													name="qtd" required> <label class="active"
 													for="first_name2">QTD</label>
 											</div>
 										</td>
 
-										<td><a href="#"
-											onclick="this.href='ServletComanda?acao=adicionaritem&quantidade='+document.getElementById('quantidade3').value+'&id='+document.getElementById('idcomanda').textContent+'&prod='+document.getElementById('codProduto3').textContent"
-											class="btn btn-sm"
+										<td><input type="submit" id="add" value="Adicionar"class="btn btn-sm"
 											style="background-color: #ffc8a4; font-size: 14; color: black; border-color: black; margin-left: 10px">
-
-												<span class="glyphicon glyphicon-search" aria-hidden="true"
-												style="margin-right: 5px"></span>Adicionar
-										</a></td>
+									</td>
 									</tr>
 								</c:if>
+								</form>
 							</c:forEach>
 						</tbody>
 					</table>
@@ -224,6 +214,7 @@
 						<tbody>
 
 							<c:forEach items="${mb.listagemProdutos}" var="produto">
+							<form name="formulario" method="post" action="ServletComanda?acao=adicionaritem&id=${id}&produto=${produto.codProdutos}">							
 								<c:if test="${produto.categoria.codCategoria=='4'}">
 									<tr>
 										<td><label id="codProduto4">${produto.codProdutos}</label></td>
@@ -233,21 +224,17 @@
 										<td style="width: 30px;">
 											<div class="input-field col s6" style="width: 250px;">
 												<input id="quantidade4" type="number" class="validate"
-													name="preco" required> <label class="active"
+													name="qtd" required> <label class="active"
 													for="first_name2">QTD</label>
 											</div>
 										</td>
 
-										<td><a href="#"
-											onclick="this.href='ServletComanda?acao=adicionaritem&quantidade='+document.getElementById('quantidade4').value+'&id='+document.getElementById('idcomanda').textContent+'&prod='+document.getElementById('codProduto4').textContent"
-											class="btn btn-sm"
+										<td><input type="submit" id="add" value="Adicionar"class="btn btn-sm"
 											style="background-color: #ffc8a4; font-size: 14; color: black; border-color: black; margin-left: 10px">
-
-												<span class="glyphicon glyphicon-search" aria-hidden="true"
-												style="margin-right: 5px"></span>Adicionar
-										</a></td>
+									</td>
 									</tr>
 								</c:if>
+								</form>
 							</c:forEach>
 						</tbody>
 					</table>
