@@ -48,9 +48,12 @@ public class main {
 		mb.getListagemComandas();
 		Comanda comanda = new Comanda();
 		comanda.getListItemComanda();
-		*/
-		
+				
 		ProdutosDAO p = new ProdutosDAO();
 		p.listAll();
+		*/
+		
+		ComandaDAO comandaDAO = new ComandaDAO();
+		comandaDAO.comprovante(1000);
 	}
 }

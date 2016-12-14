@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.com.comanda.entities.Categoria;
 import br.com.comanda.entities.Comanda;
+import br.com.comanda.entities.Comprovante;
 import br.com.comanda.entities.ItemComanda;
 import br.com.comanda.entities.Produto;
 import br.com.comanda.persistence.CategoriaDAO;
@@ -131,10 +132,15 @@ public class ControleComanda extends HttpServlet {
 					Integer idComanda = Integer.parseInt(request.getParameter("id"));
 
 					ItemComandaDAO itemComandaDAO = new ItemComandaDAO();
+					ComandaDAO comandaDAO = new ComandaDAO();
+					
+					List<Comprovante> listComprovante = comandaDAO.comprovante(idComanda);
 
-					List<ItemComanda> lista = itemComandaDAO.findById(idComanda);
+					List<ItemComanda> listaItens = itemComandaDAO.findById(idComanda);
+					
 
-					request.setAttribute("listaItens", lista);
+					request.setAttribute("listaItens", listaItens);
+					request.setAttribute("listaComprovante", listComprovante);
 					request.setAttribute("id", idComanda);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
@@ -146,8 +152,10 @@ public class ControleComanda extends HttpServlet {
 			} else if (acao.equalsIgnoreCase("adicionaritem")) {
 
 				Integer idComanda = Integer.parseInt(request.getParameter("id"));
-				Integer codProduto = Integer.parseInt(request.getParameter("produto"));
 				Integer qtd = Integer.parseInt(request.getParameter("qtd"));
+				Integer codProduto = Integer.parseInt(request.getParameter("produto"));		
+				Integer teste = Integer.parseInt(request.getParameter("teste"));
+				String pagina = "";
 				
 				try {
 					
@@ -168,14 +176,24 @@ public class ControleComanda extends HttpServlet {
 						itemComandaDAO.inserir(itemComanda);
 					}
 					
-					request.setAttribute("mensagem", "Produto adicionado a comanda " + idComanda);
-					request.setAttribute("id", idComanda);
+					if(teste>1){
+						request.setAttribute("mensagem", "Produto adicionado a comanda " + idComanda);
+						request.setAttribute("id", idComanda);
+						pagina = "incluirprodutos.jsp";
+					}else{
+						
+						List<Comprovante> listComprovante = comandaDAO.comprovante(idComanda);
+						request.setAttribute("listaComprovante", listComprovante);
+						request.setAttribute("id", idComanda);
+						pagina = "detalhecomanda.jsp";
+					}
+					
 					
 				} catch (SQLException e) {
 					request.setAttribute("mensagem", e);
 					request.setAttribute("id", idComanda);					
 				}finally {
-					request.getRequestDispatcher("incluirprodutos.jsp").forward(request, response);
+					request.getRequestDispatcher(pagina).forward(request, response);
 				}
 
 			} else if (acao.equalsIgnoreCase("paginaitens")) {

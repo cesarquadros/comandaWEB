@@ -38,7 +38,7 @@
 
 
 </head>
-<body style="padding: 0px;">
+<body style="padding: 0px; font-size: 10pt">
 
 	<jsp:include page="menu.jsp"></jsp:include>
 
@@ -77,7 +77,7 @@
 						</thead>
 						<tbody>
 							<c:forEach items="${mb.listagemProdutos}" var="produto">
-							<form name="formulario" method="post" action="ServletComanda?acao=adicionaritem&id=${id}&produto=${produto.codProdutos}">
+							<form name="formulario" method="post" action="ServletComanda?acao=adicionaritem&id=${id}&produto=${produto.codProdutos}&teste=2">
 								<c:if test="${produto.categoria.codCategoria=='1'}">
 									<tr>
 										<td><label id="codProduto">${produto.codProdutos}</label></td>
@@ -107,12 +107,11 @@
 		<div id="bebidas" class="col s12">
 			<br /> <br />
 			<div style="margin: auto; width: 100%;">
-				<div style="overflow: auto; width: 100%; height: 500px;">
-					<table
-						class="table table-hover highlight responsive-table bordered"
-						id="dataTables-example">
+				<div style="overflow: auto; width: 100%; height: 500px;border-top: solid 1px black">
+					<table class="table table-hover highlight responsive-table bordered" id="dataTables-example">
 						<thead>
 							<tr>
+								<th>Codigo</th>
 								<th>Nome</th>
 								<th>Observações</th>
 								<th>Preço</th>
@@ -122,7 +121,7 @@
 						<tbody>
 
 							<c:forEach items="${mb.listagemProdutos}" var="produto">
-							<form name="formulario" method="post" action="ServletComanda?acao=adicionaritem&id=${id}&produto=${produto.codProdutos}">
+							<form name="formulario" method="post" action="ServletComanda?acao=adicionaritem&id=${id}&produto=${produto.codProdutos}&teste=2">
 								<c:if test="${produto.categoria.codCategoria=='2'}">
 															
 									<tr>
@@ -131,8 +130,8 @@
 										<td>${produto.observacoes}</td>
 										<td>R$ ${produto.preco}</td>
 										<td style="width: 30px;">
-											<div class="input-field col s6" style="width: 250px;">
-												<input id="quantidade2" type="number" class="validate"
+											<div class="input-field col s6" style="width: 100px;">
+												<input id="quantidade" type="number" class="validate"
 													name="qtd" required> <label class="active"
 													for="first_name2">QTD</label>
 											</div>
@@ -153,12 +152,11 @@
 		<div id="lanches" class="col s12">
 			<br /> <br />
 			<div style="margin: auto; width: 100%;">
-				<div style="overflow: auto; width: 100%; height: 500px;">
-					<table
-						class="table table-hover highlight responsive-table bordered"
-						id="dataTables-example">
+				<div style="overflow: auto; width: 100%; height: 500px;border-top: solid 1px black">
+					<table class="table table-hover highlight responsive-table bordered" id="dataTables-example">
 						<thead>
 							<tr>
+								<th>Codigo</th>
 								<th>Nome</th>
 								<th>Observações</th>
 								<th>Preço</th>
@@ -168,7 +166,7 @@
 						<tbody>
 
 							<c:forEach items="${mb.listagemProdutos}" var="produto">
-								<form name="formulario" method="post" action="ServletComanda?acao=adicionaritem&id=${id}&produto=${produto.codProdutos}">
+								<form name="formulario" method="post" action="ServletComanda?acao=adicionaritem&id=${id}&produto=${produto.codProdutos}&teste=2">
 								<c:if test="${produto.categoria.codCategoria=='3'}">
 									<tr>
 										<td><label id="codProduto3">${produto.codProdutos}</label></td>
@@ -176,8 +174,8 @@
 										<td>${produto.observacoes}</td>
 										<td>R$ ${produto.preco}</td>
 										<td style="width: 30px;">
-											<div class="input-field col s6" style="width: 250px;">
-												<input id="quantidade3" type="number" class="validate"
+											<div class="input-field col s6" style="width: 100px;">
+												<input id="quantidade" type="number" class="validate"
 													name="qtd" required> <label class="active"
 													for="first_name2">QTD</label>
 											</div>
@@ -199,12 +197,11 @@
 		<div id="outros" class="col s12">
 			<br /> <br />
 			<div style="margin: auto; width: 100%;">
-				<div style="overflow: auto; width: 100%; height: 500px;">
-					<table
-						class="table table-hover highlight responsive-table bordered"
-						id="dataTables-example">
+				<div style="overflow: auto; width: 100%; height: 500px;border-top: solid 1px black">
+					<table class="table table-hover highlight responsive-table bordered" id="dataTables-example">
 						<thead>
 							<tr>
+								<th>Codigo</th>
 								<th>Nome</th>
 								<th>Observações</th>
 								<th>Preço</th>
@@ -212,9 +209,8 @@
 							</tr>
 						</thead>
 						<tbody>
-
 							<c:forEach items="${mb.listagemProdutos}" var="produto">
-							<form name="formulario" method="post" action="ServletComanda?acao=adicionaritem&id=${id}&produto=${produto.codProdutos}">							
+							<form name="formulario" method="post" action="ServletComanda?acao=adicionaritem&id=${id}&produto=${produto.codProdutos}&teste=2">							
 								<c:if test="${produto.categoria.codCategoria=='4'}">
 									<tr>
 										<td><label id="codProduto4">${produto.codProdutos}</label></td>
@@ -222,8 +218,8 @@
 										<td>${produto.observacoes}</td>
 										<td>R$ ${produto.preco}</td>
 										<td style="width: 30px;">
-											<div class="input-field col s6" style="width: 250px;">
-												<input id="quantidade4" type="number" class="validate"
+											<div class="input-field col s6" style="width: 100px;">
+												<input id="quantidade" type="number" class="validate"
 													name="qtd" required> <label class="active"
 													for="first_name2">QTD</label>
 											</div>
@@ -240,9 +236,7 @@
 					</table>
 				</div>
 			</div>
-
 		</div>
 	</div>
-
 </body>
 </html>

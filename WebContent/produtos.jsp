@@ -30,8 +30,10 @@
 <!-- Compiled and minified JavaScript -->
 <script type="text/javascript" src="//code.jquery.com/jquery-2.1.4.js"></script>
 <style type="text/css"></style>
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
 
 
 
@@ -52,7 +54,8 @@
 	<h2 style="margin: auto; text-align: center; font-family: serif;">Produtos</h2>
 	<div style="margin: auto; width: 95%;">
 
-		<form class="col s12" name="formulario" method="post" action="ServletComanda?acao=cadastrarproduto"
+		<form class="col s12" name="formulario" method="post"
+			action="ServletComanda?acao=cadastrarproduto"
 			style="width: 25%; float: left;">
 			<div class="row" style="width: 400px;">
 				<div class="input-field col s6" style="width: 250px;">
@@ -69,10 +72,9 @@
 			<div class="row" style="width: 400px;">
 				<div class="input-field col s12" style="width: 250px;">
 					<select name="idCategoria" required>
-						<option value="" disabled selected>Escolha uma categoria</option>
+						<option value="">Selecione a categoria</option>
 						<c:forEach items="${mbC.listagemCategoria}" var="categoria">
-							<option value="${categoria.codCategoria }">
-								${categoria.categoria}</option>
+							<option value="${categoria.codCategoria }">${categoria.categoria}</option>
 						</c:forEach>
 					</select>
 				</div>
@@ -83,11 +85,12 @@
 						for="first_name2">Observações</label>
 				</div>
 			</div>
-			<input type="submit" class="waves-effect waves-light btn" value="Salvar"/>
+			<input type="submit" class="waves-effect waves-light btn"
+				value="Salvar" />
 		</form>
 
-		<h4 style="color: green";>${mensagem}</h4>
-		<h4 style="color: red";>${mensagem2}</h4>
+		<h4 style="color: green">${mensagem}</h4>
+		<h4 style="color: red">${mensagem2}</h4>
 		<br />
 		<div style="overflow: auto; width: 75%; height: 500px;">
 			<table class="table table-hover highlight responsive-table bordered"

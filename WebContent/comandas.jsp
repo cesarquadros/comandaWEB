@@ -43,7 +43,7 @@
 					<th>Status</th>
 					<th>Valor Total</th>
 					<th>Produtos</th>
-					<th>Comanda</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -53,7 +53,7 @@
 					<td>${comanda.nome}</td>
 					<td>${comanda.status}</td>
 					<td>R$ ${comanda.valorTotal}</td>
-					<td style="width: 10%"><a href="ServletComanda?acao=paginaitens&id=${comanda.codComanda}" class="waves-effect waves-light btn">Adicionar</a></td>
+					<td style="width: 10%"><a href="ServletComanda?acao=paginaitens&id=${comanda.codComanda}" class="waves-effect waves-light btn" style="border-radius: 50px">+</a></td>
 					<td><a href="ServletComanda?acao=detalhescomanda&id=${comanda.codComanda}" class="waves-effect waves-light btn" style="background-color:buttonshadow;">Detalhes</a></td>
 				</tr>
 				</c:forEach>
