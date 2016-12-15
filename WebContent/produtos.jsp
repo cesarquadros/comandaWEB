@@ -54,9 +54,7 @@
 	<h2 style="margin: auto; text-align: center; font-family: serif;">Produtos</h2>
 	<div style="margin: auto; width: 95%;">
 
-		<form class="col s12" name="formulario" method="post"
-			action="ServletComanda?acao=cadastrarproduto"
-			style="width: 25%; float: left;">
+		<form class="col s12" name="formulario" method="post" action="ServletComanda?acao=cadastrarproduto" style="width: 25%; float: left;">
 			<div class="row" style="width: 400px;">
 				<div class="input-field col s6" style="width: 250px;">
 					<input id="first_name2" type="text" class="validate"
@@ -85,8 +83,7 @@
 						for="first_name2">Observações</label>
 				</div>
 			</div>
-			<input type="submit" class="waves-effect waves-light btn"
-				value="Salvar" />
+			<input type="submit" class="waves-effect waves-light btn" value="Salvar" />
 		</form>
 
 		<h4 style="color: green">${mensagem}</h4>
@@ -124,5 +121,7 @@
 		</div>
 	</div>
 
+	
+	<script type="text/javascript" src="js/materialize.js"></script>
 </body>
 </html>

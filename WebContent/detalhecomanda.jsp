@@ -53,8 +53,7 @@
 
 	<div class="chip">Comanda: ${id}</div>
 
-	<h2 style="margin: auto; text-align: center; font-family: serif;">Detalhes
-		da Comanda</h2>
+	<h2 style="margin: auto; text-align: center; font-family: serif;">Detalhes da Comanda</h2>
 	<div style="margin: auto; width: 95%;">
 
 
@@ -87,7 +86,7 @@
 							<td>${comprovante.quantidade}</td>
 							<td>R$${comprovante.valorTotal}</td>
 							<td style="width: 10%"><a href="ServletComanda?acao=adicionaritem&produto=${comprovante.produto}&id=${id}&qtd=1&teste=1" class="waves-effect waves-light btn" style="border-radius: 50px">+</a></td>
-							<td style="width: 10%"><a href="ServletComanda?acao=adicionaritem&produto=${comprovante.produto}&id=${id}&qtd=1&teste=1" class="waves-effect waves-light btn" style="border-radius: 50px; background: red;">-</a></td>							
+							<td style="width: 10%"><a href="ServletComanda?acao=removeritem&produto=${comprovante.produto}&id=${id}&qtd=1&teste=1" class="waves-effect waves-light btn" style="border-radius: 50px; background: red;">-</a></td>							
 						</tr>
 					</c:forEach>
 				</tbody>

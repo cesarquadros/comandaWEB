@@ -73,7 +73,7 @@ public class ControleComanda extends HttpServlet {
 				try {
 					// pegando os atributos do form
 					String nome = request.getParameter("nome");
-					String status = "aberto";
+					String status = "ABERTO";
 					// pegando data atual
 					Date data = ConverteData.getDataAtual();
 					float valorTotal = 0;
@@ -94,7 +94,7 @@ public class ControleComanda extends HttpServlet {
 					String erro = e.getMessage();
 					request.setAttribute("mensagem", "OPS! Ocorreu um erro: " + erro);
 				} finally {
-					request.getRequestDispatcher("produtos.jsp").forward(request, response);
+					request.getRequestDispatcher("comandas.jsp").forward(request, response);
 				}
 
 			} else if (acao.equalsIgnoreCase("cadastrarproduto")) {
