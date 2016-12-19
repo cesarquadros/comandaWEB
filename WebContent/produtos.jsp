@@ -104,7 +104,6 @@
 				<tbody>
 
 					<c:forEach items="${mb.listagemProdutos}" var="produto">
-
 						<tr>
 							<td>${produto.codProdutos}</td>
 							<td>${produto.descricao}</td>
@@ -112,15 +111,11 @@
 							<td>${produto.observacoes}</td>
 							<td>R$ ${produto.preco}</td>
 						</tr>
-
 					</c:forEach>
-
 				</tbody>
-
 			</table>
 		</div>
 	</div>
-
 	
 	<script type="text/javascript" src="js/materialize.js"></script>
 </body>

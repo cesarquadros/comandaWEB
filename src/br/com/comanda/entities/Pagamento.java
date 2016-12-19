@@ -1,36 +1,28 @@
 package br.com.comanda.entities;
 
 
-import java.sql.SQLException;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
-
 import br.com.comanda.persistence.ComandaDAO;
 
-public class Pagamento extends ComandaDAO {
-	private int codComanda;
-	private float valorPagamento = 0;
+public class Pagamento{
+	private Comanda Comanda;
+	private Float valorPagamento=(float) 0;
 	private String observacaoPagamento ="";
 	
-	public Pagamento(){
-	}
 	
-	public Pagamento(int codComanda, float valorPagamento, String obervacaoPagamento){
-		this.codComanda = codComanda;
-		this.valorPagamento = valorPagamento;
-		this.observacaoPagamento = obervacaoPagamento;
-	}
 	
-	public int getCodComandao() {
-		return codComanda;
+	public Pagamento() {
 	}
-	public void setCodComanda(int codPagamento) {
-		this.codComanda = codPagamento;
+
+	public Comanda getComanda() {
+		return Comanda;
 	}
-	public float getValorPagamento() {
+	public void setComanda(Comanda comanda) {
+		Comanda = comanda;
+	}
+	public Float getValorPagamento() {
 		return valorPagamento;
 	}
-	public void setValorPagamento(float valorPagamento) {
+	public void setValorPagamento(Float valorPagamento) {
 		this.valorPagamento = valorPagamento;
 	}
 	public String getObservacaoPagamento() {
@@ -40,41 +32,6 @@ public class Pagamento extends ComandaDAO {
 		this.observacaoPagamento = observacaoPagamento;
 	}
 	
-/*	public boolean efetuarPagamentos(JTable tabelaComandas) throws SQLException{
-		valorPagamento = 0;
-		observacaoPagamento ="";
-
-		while (observacaoPagamento.equals("")) {
-			observacaoPagamento = JOptionPane.showInputDialog("Observação", null);
-		}
-
-		while (valorPagamento <= 0) {
-			try {
-				valorPagamento = Float.parseFloat(
-						JOptionPane.showInputDialog("Digite o valor a ser pago", null).replaceAll(",", "."));
-				
-			} catch (NumberFormatException e) {
-				System.out.println(e);
-				JOptionPane.showMessageDialog(null, "Digite apenas números", "Bar do Bugão",
-						JOptionPane.ERROR_MESSAGE);
-			}
-		}
-		codComanda = Integer
-				.parseInt((String) tabelaComandas.getModel().getValueAt(tabelaComandas.getSelectedRow(), 0));
-
-		ItemComandaDAO itemComandaDAO = new ItemComandaDAO();
-		float valorTotal = itemComandaDAO.valorTotal(codComanda);
-		float valorPago = valorAPagar(codComanda);
-		float valorRestante = valorTotal - valorPago;
-		
-		if(valorRestante<valorPagamento){
-			JOptionPane.showMessageDialog(null, "Valor inserido maior que o total da conta", "Bar do Bugão",
-					JOptionPane.ERROR_MESSAGE);
-		}else{
-			Pagamento pagamento = new Pagamento(codComanda, valorPagamento, observacaoPagamento);
-			return efetuarPagamento(pagamento);
-		}
-		return false;
-	}*/
-
+	
+	
 }

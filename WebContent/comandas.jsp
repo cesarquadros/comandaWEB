@@ -60,7 +60,7 @@
 					<td>${comanda.status}</td>
 					<td>R$ ${comanda.valorTotal}</td>
 					<td style="width: 10%"><a href="ServletComanda?acao=paginaitens&id=${comanda.codComanda}" class="waves-effect waves-light btn" style="border-radius: 50px">+</a></td>
-					<td><a href="ServletComanda?acao=detalhescomanda&id=${comanda.codComanda}" class="waves-effect waves-light btn" style="background-color:buttonshadow;">Detalhes</a></td>
+					<td><a href="ServletComanda?acao=detalhescomanda&id=${comanda.codComanda}" class="waves-effect waves-light btn" style="background-color:buttonshadow;border-radius: 50px">Detalhes</a></td>
 				</tr>
 				</c:forEach>
 			</tbody>

@@ -17,6 +17,9 @@ public class ItemComandaDAO extends Conexao{
 		stmt.setInt(1, itemComanda.getProdutos().getCodProdutos());
 		stmt.setInt(2, itemComanda.getComanda().getCodComanda());
 		stmt.execute();
+		
+		stmt.close();
+		con.close();
 	}
 	
 	public boolean excluirItemComanda(int codItem){

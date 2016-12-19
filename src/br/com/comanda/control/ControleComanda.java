@@ -16,10 +16,12 @@ import br.com.comanda.entities.Categoria;
 import br.com.comanda.entities.Comanda;
 import br.com.comanda.entities.Comprovante;
 import br.com.comanda.entities.ItemComanda;
+import br.com.comanda.entities.Pagamento;
 import br.com.comanda.entities.Produto;
 import br.com.comanda.persistence.CategoriaDAO;
 import br.com.comanda.persistence.ComandaDAO;
 import br.com.comanda.persistence.ItemComandaDAO;
+import br.com.comanda.persistence.PagamentoDAO;
 import br.com.comanda.persistence.ProdutosDAO;
 import br.com.comanda.util.ConverteData;
 
@@ -133,11 +135,10 @@ public class ControleComanda extends HttpServlet {
 
 					ItemComandaDAO itemComandaDAO = new ItemComandaDAO();
 					ComandaDAO comandaDAO = new ComandaDAO();
-					
+
 					List<Comprovante> listComprovante = comandaDAO.comprovante(idComanda);
 
 					List<ItemComanda> listaItens = itemComandaDAO.findById(idComanda);
-					
 
 					request.setAttribute("listaItens", listaItens);
 					request.setAttribute("listaComprovante", listComprovante);
@@ -153,12 +154,12 @@ public class ControleComanda extends HttpServlet {
 
 				Integer idComanda = Integer.parseInt(request.getParameter("id"));
 				Integer qtd = Integer.parseInt(request.getParameter("qtd"));
-				Integer codProduto = Integer.parseInt(request.getParameter("produto"));		
+				Integer codProduto = Integer.parseInt(request.getParameter("produto"));
 				Integer teste = Integer.parseInt(request.getParameter("teste"));
 				String pagina = "";
-				
+
 				try {
-					
+
 					ItemComanda itemComanda = new ItemComanda();
 
 					ComandaDAO comandaDAO = new ComandaDAO();
@@ -175,24 +176,23 @@ public class ControleComanda extends HttpServlet {
 
 						itemComandaDAO.inserir(itemComanda);
 					}
-					
-					if(teste>1){
+
+					if (teste > 1) {
 						request.setAttribute("mensagem", "Produto adicionado a comanda " + idComanda);
 						request.setAttribute("id", idComanda);
 						pagina = "incluirprodutos.jsp";
-					}else{
-						
+					} else {
+
 						List<Comprovante> listComprovante = comandaDAO.comprovante(idComanda);
 						request.setAttribute("listaComprovante", listComprovante);
 						request.setAttribute("id", idComanda);
 						pagina = "detalhecomanda.jsp";
 					}
-					
-					
+
 				} catch (SQLException e) {
 					request.setAttribute("mensagem", e);
-					request.setAttribute("id", idComanda);					
-				}finally {
+					request.setAttribute("id", idComanda);
+				} finally {
 					request.getRequestDispatcher(pagina).forward(request, response);
 				}
 
@@ -201,8 +201,41 @@ public class ControleComanda extends HttpServlet {
 				Integer idComanda = Integer.parseInt(request.getParameter("id"));
 				request.setAttribute("id", idComanda);
 				request.getRequestDispatcher("incluirprodutos.jsp").forward(request, response);
+			} else if (acao.equalsIgnoreCase("efetuarpagamento")) {
+
+				try {
+					Integer idComanda = Integer.parseInt(request.getParameter("id"));
+					Float valor = Float.valueOf(request.getParameter("valor").replaceAll(",", "."));
+					String observacoes = request.getParameter("obeservacao");
+
+					ComandaDAO comandaDAO = new ComandaDAO();
+
+					Pagamento pagamento = new Pagamento();
+					pagamento.setComanda(comandaDAO.findById(idComanda));
+					pagamento.setValorPagamento(valor);
+					pagamento.setObservacaoPagamento(observacoes);
+
+					PagamentoDAO pagamentoDAO = new PagamentoDAO();
+
+					pagamentoDAO.efetuarPagamento(pagamento);
+					ItemComandaDAO itemComandaDAO = new ItemComandaDAO();
+
+					List<Comprovante> listComprovante = comandaDAO.comprovante(idComanda);
+
+					List<ItemComanda> listaItens = itemComandaDAO.findById(idComanda);
+
+					request.setAttribute("listaItens", listaItens);
+					request.setAttribute("listaComprovante", listComprovante);
+					request.setAttribute("id", idComanda);
+					request.setAttribute("mensagem", "Pagamento efetuado");
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}finally {
+					request.getRequestDispatcher("detalhecomanda.jsp").forward(request, response);
+				}
 			}
 		}
 	}
-
 }

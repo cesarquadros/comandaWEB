@@ -51,17 +51,48 @@
 		}
 	</script>
 
-	<div class="chip">Comanda: ${id}</div>
-
+	<div class="chip">Comanda: ${id} </div>${mensagem}
+		<!-- Dropdown Trigger -->
+		
+		<a class='dropdown-button btn' href='#' data-activates='dropdown1'style="border-radius: 50px; float: right; margin-right: 5px; margin-top: 5px;">Opções da Comanda</a>	
+		<!-- Dropdown Structure -->
+		<ul id='dropdown1' class='dropdown-content'>
+		<li><a href="#modaldetalhes" class="modal-trigger">Efetuar Pagamento</a></li>
+		<li class="divider"></li>
+		<li><a href="#!">Detalhes de Pagamentos</a></li>
+		<li class="divider"></li>
+		<li><a href="#!" class="modal-trigger">Fechar comanda</a></li>
+		</ul>
+		
+		
+	<form class="col s12" name="formulario" method="post" action="ServletComanda?acao=efetuarpagamento&id=${id}">		
+		<div class="modal" id="modaldetalhes" style="width: 300px; text-align: center;">
+			<div class="modal-content">
+				<h5>Valor a ser pago</h5>
+			</div>
+			<div class="modal-footer">
+				<div class="input-field col s6" style="width: 250px;">
+					<input id="valor" type="text" class="validate" name="valor" required> <label class="active"for="first_name2">Valor</label>
+				</div>
+			</div>
+			
+			<div class="modal-footer">
+				<div class="input-field col s6" style="width: 250px;">
+					<input id="obeservacao" type="text" class="validate" name="obeservacao" required> <label class="active"for="first_name2">Observação</label>
+				</div>
+			</div>
+			<br/>
+			<input type="submit" class="waves-effect waves-light btn" value="Efetuar pagamento" style="border-radius: 50px; margin: auto; margin-bottom: 5px;"/>
+		</div>
+	</form>
+		
+		
+	
 	<h2 style="margin: auto; text-align: center; font-family: serif;">Detalhes da Comanda</h2>
 	<div style="margin: auto; width: 95%;">
+		<br/>
 
-
-		<h4 style="color: green;">${mensagem}</h4>
-		<h4 style="color: red;">${mensagem2}</h4>
-		<br />
-
-		<div style="overflow: auto; width: 55%; height: 500px;">
+		<div style="overflow: auto; width: 70%; height: 580px; margin: auto;">
 			<table class="table table-hover highlight responsive-table bordered"
 				id="dataTables-example">
 				<thead>
@@ -72,8 +103,7 @@
 						<th>Quantidade</th>
 						<th>Preço</th>
 						<th>Adicionar</th>
-						<th>Remover</th>
-												
+						<th>Remover</th>					
 					</tr>
 				</thead>
 				<tbody>
@@ -86,7 +116,7 @@
 							<td>${comprovante.quantidade}</td>
 							<td>R$${comprovante.valorTotal}</td>
 							<td style="width: 10%"><a href="ServletComanda?acao=adicionaritem&produto=${comprovante.produto}&id=${id}&qtd=1&teste=1" class="waves-effect waves-light btn" style="border-radius: 50px">+</a></td>
-							<td style="width: 10%"><a href="ServletComanda?acao=removeritem&produto=${comprovante.produto}&id=${id}&qtd=1&teste=1" class="waves-effect waves-light btn" style="border-radius: 50px; background: red;">-</a></td>							
+							<td style="width: 10%"><a href="ServletComanda?acao=removeritem&produto=${comprovante.produto}&id=${id}&qtd=1&teste=1" class="waves-effect waves-light btn" style="border-radius: 50px; background: #ef5350;">-</a></td>							
 						</tr>
 					</c:forEach>
 				</tbody>

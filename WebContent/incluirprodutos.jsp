@@ -64,15 +64,16 @@
 		<div id="cerveja" class="col s12">
 			<br /> <br />
 			<div style="margin: auto; width: 100%;">
-				<div style="overflow: auto; width: 100%; height: 500px;border-top: solid 1px black">
+				<div style="overflow: auto; width: 100%; height: 500px;">
 					<table class="table table-hover highlight responsive-table bordered" id="dataTables-example">
-						<thead>
+						<thead style="background-color: #eeeeee;">
 							<tr>
 								<th>Codigo</th>
 								<th>Nome</th>
 								<th>Observações</th>
 								<th>Preço</th>
 								<th>Quantidade</th>
+								<th></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -93,7 +94,7 @@
 										</td>
  
 										<td><input type="submit" id="add" value="Adicionar"class="btn btn-sm"
-											style="background-color: #ffc8a4; font-size: 14; color: black; border-color: black; margin-left: 10px">
+											style="background-color: #26a69a; border-radius: 50px; font-size: 14; color: black; border-color: black; margin-left: 10px">
 									</td>
 									</tr>
 								</c:if>
@@ -107,7 +108,7 @@
 		<div id="bebidas" class="col s12">
 			<br /> <br />
 			<div style="margin: auto; width: 100%;">
-				<div style="overflow: auto; width: 100%; height: 500px;border-top: solid 1px black">
+				<div style="overflow: auto; width: 100%; height: 500px;">
 					<table class="table table-hover highlight responsive-table bordered" id="dataTables-example">
 						<thead>
 							<tr>
@@ -138,7 +139,7 @@
 										</td>
 
 										<td><input type="submit" id="add" value="Adicionar"class="btn btn-sm"
-											style="background-color: #ffc8a4; font-size: 14; color: black; border-color: black; margin-left: 10px">
+											style="background-color: #26a69a; border-radius: 50px; font-size: 14; color: black; border-color: black; margin-left: 10px">
 									</td>
 									</tr>
 								</c:if>
@@ -152,7 +153,7 @@
 		<div id="lanches" class="col s12">
 			<br /> <br />
 			<div style="margin: auto; width: 100%;">
-				<div style="overflow: auto; width: 100%; height: 500px;border-top: solid 1px black">
+				<div style="overflow: auto; width: 100%; height: 500px;">
 					<table class="table table-hover highlight responsive-table bordered" id="dataTables-example">
 						<thead>
 							<tr>
@@ -182,7 +183,7 @@
 										</td>
 
 										<td><input type="submit" id="add" value="Adicionar"class="btn btn-sm"
-											style="background-color: #ffc8a4; font-size: 14; color: black; border-color: black; margin-left: 10px">
+											style="background-color: #26a69a; border-radius: 50px;font-size: 14; color: black; margin-left: 10px">
 									</td>
 									</tr>
 								</c:if>
@@ -197,7 +198,7 @@
 		<div id="outros" class="col s12">
 			<br /> <br />
 			<div style="margin: auto; width: 100%;">
-				<div style="overflow: auto; width: 100%; height: 500px;border-top: solid 1px black">
+				<div style="overflow: auto; width: 100%; height: 500px;">
 					<table class="table table-hover highlight responsive-table bordered" id="dataTables-example">
 						<thead>
 							<tr>
@@ -226,7 +227,7 @@
 										</td>
 
 										<td><input type="submit" id="add" value="Adicionar"class="btn btn-sm"
-											style="background-color: #ffc8a4; font-size: 14; color: black; border-color: black; margin-left: 10px">
+											style="background-color: #26a69a;border-radius: 50px; font-size: 14; color: black; border-color: black; margin-left: 10px">
 									</td>
 									</tr>
 								</c:if>

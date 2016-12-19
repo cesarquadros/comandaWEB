@@ -13,11 +13,12 @@ public class Comanda {
 	private String status;
 	private float valorTotal;
 	private List<ItemComanda> listItemComanda;
-	
+	private List<Pagamento> listPagamento;	
 	
 	
 	public Comanda() {
 		this.listItemComanda = new ArrayList<ItemComanda>(); 
+		this.listPagamento = new ArrayList<Pagamento>();
 	}
 
 	public Comanda(String nome, Date data, String status, float valorTotal){
@@ -41,6 +42,10 @@ public class Comanda {
 		listItemComanda.add(item);
 	}
 	
+	public void addPagamento(Pagamento pagamento){
+		listPagamento.add(pagamento);
+	}
+	
 	public int getCodComanda() {
 		return codComanda;
 	}
@@ -56,7 +61,6 @@ public class Comanda {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 	
 	public Date getDataInicio() {
 		return dataInicio;
@@ -83,10 +87,16 @@ public class Comanda {
 	}
 	
 	public float getValorTotal() {
+		Float valor = (float) 0.0;
+		Float pagamentos = (float) 0.0;
 		for (int i = 0; i < listItemComanda.size(); i++) {
-			valorTotal += listItemComanda.get(i).getProdutos().getPreco();
+			valor += this.listItemComanda.get(i).getProdutos().getPreco();
 		}
-		return valorTotal;
+		
+		for (int i = 0; i < listPagamento.size(); i++) {
+			pagamentos += listPagamento.get(i).getValorPagamento();
+		}
+		return valor - pagamentos;
 	}
 	
 	public void setValorTotal(float valorTotal) {
