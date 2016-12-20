@@ -11,25 +11,22 @@ public class Comanda {
 	private Date dataInicio;
 	private Date dataFim;
 	private String status;
-	private float valorTotal;
+	private float valorTotal = 0;
 	private List<ItemComanda> listItemComanda;
-	private List<Pagamento> listPagamento;	
-	
-	
+	private List<Pagamento> listPagamento;
+
 	public Comanda() {
-		this.listItemComanda = new ArrayList<ItemComanda>(); 
+		this.listItemComanda = new ArrayList<ItemComanda>();
 		this.listPagamento = new ArrayList<Pagamento>();
 	}
 
-	public Comanda(String nome, Date data, String status, float valorTotal){
+	public Comanda(String nome, Date data, String status, float valorTotal) {
 		this.nome = nome;
 		this.dataInicio = data;
 		this.status = status;
 		this.valorTotal = valorTotal;
 	}
-	
-	
-	
+
 	public List<ItemComanda> getListItemComanda() {
 		return listItemComanda;
 	}
@@ -38,30 +35,30 @@ public class Comanda {
 		this.listItemComanda = listItemComanda;
 	}
 
-	public void addItem(ItemComanda item){
+	public void addItem(ItemComanda item) {
 		listItemComanda.add(item);
 	}
-	
-	public void addPagamento(Pagamento pagamento){
+
+	public void addPagamento(Pagamento pagamento) {
 		listPagamento.add(pagamento);
 	}
-	
+
 	public int getCodComanda() {
 		return codComanda;
 	}
-	
+
 	public void setCodComanda(int codComanda) {
 		this.codComanda = codComanda;
 	}
-	
+
 	public String getNome() {
 		return nome;
 	}
-	
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
 	public Date getDataInicio() {
 		return dataInicio;
 	}
@@ -81,28 +78,25 @@ public class Comanda {
 	public String getStatus() {
 		return status;
 	}
-	
+
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
+
 	public float getValorTotal() {
 		Float valor = (float) 0.0;
 		Float pagamentos = (float) 0.0;
 		for (int i = 0; i < listItemComanda.size(); i++) {
 			valor += this.listItemComanda.get(i).getProdutos().getPreco();
 		}
-		
+
 		for (int i = 0; i < listPagamento.size(); i++) {
 			pagamentos += listPagamento.get(i).getValorPagamento();
 		}
 		return valor - pagamentos;
 	}
-	
+
 	public void setValorTotal(float valorTotal) {
 		this.valorTotal = valorTotal;
 	}
-	
-	
-	
 }

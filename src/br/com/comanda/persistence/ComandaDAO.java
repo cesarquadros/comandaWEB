@@ -118,7 +118,7 @@ public class ComandaDAO extends Conexao {
 
 		List<Comprovante> listComprovante = new ArrayList<Comprovante>();
 
-		String sql = "SELECT P.COD_PRODUTO, P.DESCRICAO, CA.CATEGORIA, P.OBSERVACOES,P.PRECO, COUNT(*) AS CONT FROM ITENS_COMANDA IC, PRODUTOS P, CATEGORIAS CA WHERE P.COD_PRODUTO = IC.COD_PRODUTO AND P.COD_CATEGORIA = CA.COD_CATEGORIA AND IC.COD_COMANDA = ? GROUP BY P.DESCRICAO, P.PRECO, CA.CATEGORIA, P.OBSERVACOES, P.COD_PRODUTO";
+		String sql = "SELECT P.COD_PRODUTO, COUNT(*) AS CONT FROM ITENS_COMANDA IC, PRODUTOS P WHERE P.COD_PRODUTO = IC.COD_PRODUTO AND IC.COD_COMANDA = ? GROUP BY P.COD_PRODUTO";
 
 		abreConexao();
 		stmt = con.prepareStatement(sql);
@@ -127,13 +127,10 @@ public class ComandaDAO extends Conexao {
 		Comprovante comprovante;
 		while (rs.next()) {
 			comprovante = new Comprovante();
+			ProdutosDAO produtosDAO = new ProdutosDAO();
 			
-			comprovante.setProduto(rs.getInt(1));
-			comprovante.setDescricao(rs.getString(2));
-			comprovante.setCategoria(rs.getString(3));
-			comprovante.setObservacoes(rs.getString(4));
-			comprovante.setPreco(rs.getFloat(5));
-			comprovante.setQuantidade(rs.getInt(6));
+			comprovante.setProduto(produtosDAO.findById(rs.getInt(1)));
+			comprovante.setQuantidade(rs.getInt(2));
 			listComprovante.add(comprovante);
 		}
 		con.close();

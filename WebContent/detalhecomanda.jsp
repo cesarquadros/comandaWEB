@@ -110,13 +110,13 @@
 
 					<c:forEach items="${listaComprovante}" var="comprovante">
 						<tr>
-							<td>${comprovante.descricao}</td>
-							<td>${comprovante.categoria}</td>
-							<td>${comprovante.observacoes}</td>
+							<td>${comprovante.produto.descricao}</td>
+							<td>${comprovante.produto.categoria.categoria}</td>
+							<td>${comprovante.produto.observacoes}</td>
 							<td>${comprovante.quantidade}</td>
-							<td>R$${comprovante.valorTotal}</td>
-							<td style="width: 10%"><a href="ServletComanda?acao=adicionaritem&produto=${comprovante.produto}&id=${id}&qtd=1&teste=1" class="waves-effect waves-light btn" style="border-radius: 50px">+</a></td>
-							<td style="width: 10%"><a href="ServletComanda?acao=removeritem&produto=${comprovante.produto}&id=${id}&qtd=1&teste=1" class="waves-effect waves-light btn" style="border-radius: 50px; background: #ef5350;">-</a></td>							
+							<!-- <td>R$${comprovante.valorTotal}</td> -->
+							<td style="width: 10%"><a href="ServletComanda?acao=adicionaritem&produto=${comprovante.produto.codProdutos}&id=${id}&qtd=1&teste=1" class="waves-effect waves-light btn" style="border-radius: 50px">+</a></td>
+							<td style="width: 10%"><a href="ServletComanda?acao=removeritem&produto=${comprovante.produto.codProdutos}&id=${id}&qtd=1&teste=1" class="waves-effect waves-light btn" style="border-radius: 50px; background: #ef5350;">-</a></td>							
 						</tr>
 					</c:forEach>
 				</tbody>

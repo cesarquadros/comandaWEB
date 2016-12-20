@@ -78,14 +78,12 @@ public class ControleComanda extends HttpServlet {
 					String status = "ABERTO";
 					// pegando data atual
 					Date data = ConverteData.getDataAtual();
-					float valorTotal = 0;
 
 					// instanciando o objeto comanda
 					Comanda comanda = new Comanda();
 					comanda.setNome(nome);
 					comanda.setDataInicio(data);
 					comanda.setStatus(status);
-					comanda.setValorTotal(valorTotal);
 
 					ComandaDAO comandaDAO = new ComandaDAO();
 
