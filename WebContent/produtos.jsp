@@ -83,7 +83,7 @@
 						for="first_name2">Observações</label>
 				</div>
 			</div>
-			<input type="submit" class="waves-effect waves-light btn" value="Salvar" />
+			<input type="submit" class="waves-effect waves-light btn" value="Salvar" style="border-radius: 50px"/>
 		</form>
 
 		<h4 style="color: green">${mensagem}</h4>

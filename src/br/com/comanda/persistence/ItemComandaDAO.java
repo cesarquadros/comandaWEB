@@ -71,4 +71,9 @@ public class ItemComandaDAO extends Conexao{
 		return listaItem;
 	}
 
+	public void delete(Integer codItem){
+		
+		String sql = "delete from ITENS_COMANDA where COD_ITEM = ?";
+		
+	}	
 }

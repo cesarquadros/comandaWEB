@@ -1,8 +1,10 @@
 package br.com.comanda.teste;
 
 import java.sql.SQLException;
-import br.com.comanda.persistence.ComandaDAO;
+import java.util.List;
 
+import br.com.comanda.entities.Pagamento;
+import br.com.comanda.persistence.PagamentoDAO;
 
 public class main {
 	
@@ -42,9 +44,13 @@ public class main {
 		p.listAll();
 		*/
 		
-		ComandaDAO comandaDAO = new ComandaDAO();
+		PagamentoDAO pagamentoDAO = new PagamentoDAO();
 		try {
-			comandaDAO.comprovante(1000);
+			List<Pagamento> p = pagamentoDAO.findByComanda(1000);
+			
+			for (Pagamento pagamento : p) {
+				System.out.println(pagamento.getObservacaoPagamento());
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

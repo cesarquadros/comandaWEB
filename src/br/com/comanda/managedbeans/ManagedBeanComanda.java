@@ -14,22 +14,9 @@ public class ManagedBeanComanda {
 
 	public List<Comanda> getListagemComandas() {
 
-		ItemComandaDAO itemComandaDAO = new ItemComandaDAO();
 		ComandaDAO comandaDAO = new ComandaDAO();
 		listagemComandas = comandaDAO.listAll();
 
-		for (int i = 0; i < listagemComandas.size(); i++) {
-			try {
-				List<ItemComanda> listItem = new ArrayList<ItemComanda>();
-				listItem = itemComandaDAO.findById(listagemComandas.get(i).getCodComanda());
-				for (int j = 0; j < listItem.size(); j++) {
-					listagemComandas.get(i).addItem(listItem.get(j));
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
 		return listagemComandas;
 	}
 }

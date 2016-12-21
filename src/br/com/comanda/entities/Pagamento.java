@@ -1,15 +1,22 @@
 package br.com.comanda.entities;
 
-
-import br.com.comanda.persistence.ComandaDAO;
-
 public class Pagamento{
+	
+	private Integer codPagamento;
 	private Comanda Comanda;
 	private Float valorPagamento=(float) 0;
 	private String observacaoPagamento ="";
 	
 	
 	
+	public Integer getCodPagamento() {
+		return codPagamento;
+	}
+
+	public void setCodPagamento(Integer codPagamento) {
+		this.codPagamento = codPagamento;
+	}
+
 	public Pagamento() {
 	}
 

@@ -75,6 +75,14 @@ public class Comanda {
 		this.dataFim = dataFim;
 	}
 
+	public List<Pagamento> getListPagamento() {
+		return listPagamento;
+	}
+
+	public void setListPagamento(List<Pagamento> listPagamento) {
+		this.listPagamento = listPagamento;
+	}
+
 	public String getStatus() {
 		return status;
 	}

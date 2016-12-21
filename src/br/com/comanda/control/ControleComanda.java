@@ -5,16 +5,13 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import br.com.comanda.entities.Categoria;
 import br.com.comanda.entities.Comanda;
-import br.com.comanda.entities.Comprovante;
 import br.com.comanda.entities.ItemComanda;
 import br.com.comanda.entities.Pagamento;
 import br.com.comanda.entities.Produto;
@@ -130,20 +127,21 @@ public class ControleComanda extends HttpServlet {
 
 				try {
 					Integer idComanda = Integer.parseInt(request.getParameter("id"));
-
-					ItemComandaDAO itemComandaDAO = new ItemComandaDAO();
 					ComandaDAO comandaDAO = new ComandaDAO();
-
-					List<Comprovante> listComprovante = comandaDAO.comprovante(idComanda);
-
-					List<ItemComanda> listaItens = itemComandaDAO.findById(idComanda);
-
-					request.setAttribute("listaItens", listaItens);
-					request.setAttribute("listaComprovante", listComprovante);
+					PagamentoDAO pagamentoDAO = new PagamentoDAO();
+					ItemComandaDAO itemComandaDAO = new ItemComandaDAO();
+				
+					Comanda comanda = comandaDAO.findById(idComanda);
+					List<Pagamento> listPagamentos = pagamentoDAO.findByComanda(idComanda);
+					List<ItemComanda> listItemComanda = itemComandaDAO.findById(idComanda);
+					
+					comanda.setListPagamento(listPagamentos);
+					comanda.setListItemComanda(listItemComanda);
+					
 					request.setAttribute("id", idComanda);
+					request.setAttribute("comanda", comanda);
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+
 				} finally {
 					request.getRequestDispatcher("detalhecomanda.jsp").forward(request, response);
 				}
@@ -181,8 +179,8 @@ public class ControleComanda extends HttpServlet {
 						pagina = "incluirprodutos.jsp";
 					} else {
 
-						List<Comprovante> listComprovante = comandaDAO.comprovante(idComanda);
-						request.setAttribute("listaComprovante", listComprovante);
+						//List<Comprovante> listComprovante = comandaDAO.comprovante(idComanda);
+						//request.setAttribute("listaComprovante", listComprovante);
 						request.setAttribute("id", idComanda);
 						pagina = "detalhecomanda.jsp";
 					}
@@ -218,12 +216,12 @@ public class ControleComanda extends HttpServlet {
 					pagamentoDAO.efetuarPagamento(pagamento);
 					ItemComandaDAO itemComandaDAO = new ItemComandaDAO();
 
-					List<Comprovante> listComprovante = comandaDAO.comprovante(idComanda);
+					//List<Comprovante> listComprovante = comandaDAO.comprovante(idComanda);
 
 					List<ItemComanda> listaItens = itemComandaDAO.findById(idComanda);
 
 					request.setAttribute("listaItens", listaItens);
-					request.setAttribute("listaComprovante", listComprovante);
+					//request.setAttribute("listaComprovante", listComprovante);
 					request.setAttribute("id", idComanda);
 					request.setAttribute("mensagem", "Pagamento efetuado");
 					
@@ -233,6 +231,10 @@ public class ControleComanda extends HttpServlet {
 				}finally {
 					request.getRequestDispatcher("detalhecomanda.jsp").forward(request, response);
 				}
+			}else if(acao.equalsIgnoreCase("removeritem")){
+				
+				System.out.println("TESTE");
+				
 			}
 		}
 	}

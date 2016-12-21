@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import br.com.comanda.entities.Comanda;
-import br.com.comanda.entities.Comprovante;
 import br.com.comanda.util.ConverteData;
 
 public class ComandaDAO extends Conexao {
@@ -61,41 +60,30 @@ public class ComandaDAO extends Conexao {
 		return listaComanda;
 	}
 
-	public Comanda findById(Integer idComanda) {
+	public Comanda findById(Integer idComanda) throws SQLException {
 		Comanda comanda = null;
-		try {
-			String sql = "select * from comanda where cod_comanda = ?";
 
-			abreConexao();
-			stmt = con.prepareStatement(sql);
-			stmt.setInt(1, idComanda);
+		String sql = "select * from comanda where cod_comanda = ?";
 
-			rs = stmt.executeQuery();
+		abreConexao();
+		stmt = con.prepareStatement(sql);
+		stmt.setInt(1, idComanda);
 
-			while (rs.next()) {
-				comanda = new Comanda();
-				comanda.setCodComanda(rs.getInt("cod_comanda"));
-				comanda.setNome(rs.getString("nome_cliente"));
-				comanda.setDataInicio(rs.getDate("data_inicio"));
-				comanda.setDataFim(rs.getDate("data_final"));
-				comanda.setStatus(rs.getString("status"));
-				comanda.setValorTotal(rs.getFloat("valor_total"));
+		rs = stmt.executeQuery();
 
-			}
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			try {
-				stmt.close();
-				con.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
+		while (rs.next()) {
+			comanda = new Comanda();
+			comanda.setCodComanda(rs.getInt("cod_comanda"));
+			comanda.setNome(rs.getString("nome_cliente"));
+			comanda.setDataInicio(rs.getDate("data_inicio"));
+			comanda.setDataFim(rs.getDate("data_final"));
+			comanda.setStatus(rs.getString("status"));
+			comanda.setValorTotal(rs.getFloat("valor_total"));
 		}
+
+		stmt.close();
+		con.close();
+
 		return comanda;
 	}
 
@@ -105,8 +93,8 @@ public class ComandaDAO extends Conexao {
 			abreConexao();
 			stmt = con.prepareStatement(sql);
 
-			stmt.setInt(1, comanda.getCodComanda());
-			stmt.setString(2, "fechado");
+			stmt.setString(1, "FECHADA");
+			stmt.setInt(2, comanda.getCodComanda());
 			stmt.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -114,66 +102,4 @@ public class ComandaDAO extends Conexao {
 		con.close();
 	}
 
-	public List<Comprovante> comprovante(int codComanda) throws SQLException {
-
-		List<Comprovante> listComprovante = new ArrayList<Comprovante>();
-
-		String sql = "SELECT P.COD_PRODUTO, COUNT(*) AS CONT FROM ITENS_COMANDA IC, PRODUTOS P WHERE P.COD_PRODUTO = IC.COD_PRODUTO AND IC.COD_COMANDA = ? GROUP BY P.COD_PRODUTO";
-
-		abreConexao();
-		stmt = con.prepareStatement(sql);
-		stmt.setInt(1, codComanda);
-		rs = stmt.executeQuery();
-		Comprovante comprovante;
-		while (rs.next()) {
-			comprovante = new Comprovante();
-			ProdutosDAO produtosDAO = new ProdutosDAO();
-			
-			comprovante.setProduto(produtosDAO.findById(rs.getInt(1)));
-			comprovante.setQuantidade(rs.getInt(2));
-			listComprovante.add(comprovante);
-		}
-		con.close();
-		stmt.close();
-		return listComprovante;
-	}
-
-	/*
-	 * public void cabecalhoComprovante(JTextArea textComprovante) {
-	 * SimpleDateFormat dateFormat = new SimpleDateFormat(
-	 * "dd/MM/yyyy - HH:mm:ss"); String dataAtual = dateFormat.format(new
-	 * Date()); textComprovante.setText(null);
-	 * textComprovante.setText(textComprovante.getText() +
-	 * "               BAR DO BUGÃO" + System.lineSeparator());
-	 * textComprovante.setText(textComprovante.getText() + "         " +
-	 * dataAtual + System.lineSeparator());
-	 * textComprovante.setText(textComprovante.getText() +
-	 * "               CUPOM FISCAL" + System.lineSeparator());
-	 * textComprovante.setText(textComprovante.getText() +
-	 * System.lineSeparator()); textComprovante
-	 * .setText(textComprovante.getText() +
-	 * " -------------  CONSUMO  -------------" + System.lineSeparator());
-	 * textComprovante.setText(textComprovante.getText() +
-	 * System.lineSeparator());
-	 * 
-	 * }
-	 * 
-	 * 
-	 * public ArrayList<Pagamento> historicoPagamentos(int codComanda, JTextArea
-	 * textComprovante) throws SQLException{ ArrayList<Pagamento> arrayPagamento
-	 * = new ArrayList<Pagamento>();
-	 * 
-	 * try { con = abreConexao(); stmt = con.createStatement();
-	 * 
-	 * sql =
-	 * "SELECT PAG_OBSERVACOES, VALOR_PAGO FROM PAGAMENTOS WHERE COD_COMANDA = '"
-	 * +codComanda+"'"; rs = stmt.executeQuery(sql);
-	 * 
-	 * while(rs.next()){ Pagamento pagamento = new Pagamento();
-	 * pagamento.setObservacaoPagamento(rs.getString(1));
-	 * pagamento.setValorPagamento(rs.getFloat(2));
-	 * arrayPagamento.add(pagamento); } } catch (SQLException e) { // TODO
-	 * Auto-generated catch block e.printStackTrace(); con.close(); }
-	 * con.close(); return arrayPagamento; }
-	 */
 }
