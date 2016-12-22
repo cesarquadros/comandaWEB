@@ -51,46 +51,97 @@
 		}
 	</script>
 
-	<div class="chip">Comanda: ${id} </div>${mensagem}
-		<!-- Dropdown Trigger -->
-		
-		<a class='dropdown-button btn' href='#' data-activates='dropdown1'style="border-radius: 50px; float: right; margin-right: 5px; margin-top: 5px;">Opções da Comanda</a>	
-		<!-- Dropdown Structure -->
-		<ul id='dropdown1' class='dropdown-content'>
-		<li><a href="#modaldetalhes" class="modal-trigger">Efetuar Pagamento</a></li>
+	<div class="chip">Comanda: ${id}</div>${mensagem}
+	<!-- Dropdown Trigger -->
+
+	<a class='dropdown-button btn' href='#' data-activates='dropdown1'
+		style="border-radius: 50px; float: right; margin-right: 5px; margin-top: 5px;">Opções
+		da Comanda</a>
+	<!-- Dropdown Structure -->
+	<ul id='dropdown1' class='dropdown-content'>
+		<li><a href="#modaldetalhes" class="modal-trigger">Efetuar
+				Pagamento</a></li>
 		<li class="divider"></li>
-		<li><a href="#!">Detalhes de Pagamentos</a></li>
+		<li><a href="#modalpagamento" class="modal-trigger">Detalhes
+				de Pagamentos</a></li>
 		<li class="divider"></li>
 		<li><a href="#!" class="modal-trigger">Fechar comanda</a></li>
-		</ul>
-		
-		
-	<form class="col s12" name="formulario" method="post" action="ServletComanda?acao=efetuarpagamento&id=${id}">		
-		<div class="modal" id="modaldetalhes" style="width: 300px; text-align: center;">
+	</ul>
+
+
+	<!-- 							MODAL EFETUAR PAGAMENTOS -->
+	<form class="col s12" name="formulario" method="post"
+		action="ServletComanda?acao=efetuarpagamento&id=${id}">
+		<div class="modal" id="modaldetalhes" style="width: 300px; border-radius: 10px; margin: auto; text-align: center;">
 			<div class="modal-content">
 				<h5>Valor a ser pago</h5>
 			</div>
 			<div class="modal-footer">
-				<div class="input-field col s6" style="width: 250px;">
-					<input id="valor" type="text" class="validate" name="valor" required> <label class="active"for="first_name2">Valor</label>
+				<div class="input-field col s6" style="width: 200px; margin: auto;">
+					<input id="valor" type="text" class="validate" name="valor"
+						required> <label class="active" for="first_name2" style="text-align: left;">Valor</label>
 				</div>
 			</div>
-			
+				<br/>
 			<div class="modal-footer">
-				<div class="input-field col s6" style="width: 250px;">
-					<input id="obeservacao" type="text" class="validate" name="obeservacao" required> <label class="active"for="first_name2">Observação</label>
+				<div class="input-field col s6" style="width: 200px; margin: auto;">
+					<input id="obeservacao" type="text" class="validate"
+						name="obeservacao" required> <label class="active"
+						for="first_name2" style="text-align: left;">Observação</label>
 				</div>
 			</div>
-			<br/>
-			<input type="submit" class="waves-effect waves-light btn" value="Efetuar pagamento" style="border-radius: 50px; margin: auto; margin-bottom: 5px;"/>
+			<br /> <input type="submit" class="waves-effect waves-light btn"
+				value="Efetuar pagamento"
+				style="border-radius: 50px; margin: auto; margin-bottom: 5px; text-align: center;" />
 		</div>
 	</form>
-		
-		
-	
-	<h2 style="margin: auto; text-align: center; font-family: serif;">Detalhes da Comanda</h2>
+
+	<!-- MODAL DETALHES DE PAGAMENTO -->
+	<div class="modal" id="modalpagamento"
+		style="width: 450px; height: 600px; border-radius: 30px;">
+		<div class="modal-content">
+			<div style="text-align: center;">
+				<h5>Comanda WEB</h5>
+				<h6>Cupon Fiscal</h6>
+				<br />
+				<h6>------------------- Histórico de pagamentos --------------------</h6>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<table class="table table-hover highlight responsive-table bordered" id="dataTables-example" style="text-align: center;">
+				<thead>
+					<tr>
+						<th>Quem pagou?</th>
+						<th>Valor pago</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${comanda.listPagamento}" var="pagamentos">
+						<tr>
+							<td>${pagamentos.observacaoPagamento}</td>
+							<td>${pagamentos.valorPagamento}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+			<div style="margin: auto;"> 
+			<p style="color: green;">Valor pago: R$ ${comanda.valorPago}</p>
+			<p style="color: red;">Valor á pagar: R$ ${comanda.valorAPagar}</p>
+			<p>Valor total: R$ ${comanda.valorTotal}</p>
+			</div>
+		</div>
+		<br />
+	</div>
+
+
+
+
+
+
+	<h2 style="margin: auto; text-align: center; font-family: serif;">Detalhes
+		da Comanda</h2>
 	<div style="margin: auto; width: 95%;">
-		<br/>
+		<br />
 
 		<div style="overflow: auto; width: 70%; height: 580px; margin: auto;">
 			<table class="table table-hover highlight responsive-table bordered"
@@ -102,21 +153,19 @@
 						<th>Observações</th>
 						<th>Preço</th>
 						<th>Adicionar</th>
-						<th>Remover</th>					
+						<th>Remover</th>
 					</tr>
 				</thead>
 				<tbody>
-
 					<c:forEach items="${comanda.listItemComanda}" var="itens">
 						<tr>
 							<td>${itens.produtos.descricao}</td>
 							<td>${itens.produtos.categoria.categoria}</td>
 							<td>${itens.produtos.observacoes}</td>
 							<td>${itens.produtos.preco}</td>
-							
-							<!-- <td>R$${comprovante.valorTotal}</td> -->
-							<%-- <td style="width: 10%"><a href="ServletComanda?acao=adicionaritem&produto=${comprovante.produto.codProdutos}&id=${id}&qtd=1&teste=1" class="waves-effect waves-light btn" style="border-radius: 50px">+</a></td>
-							<td style="width: 10%"><a href="ServletComanda?acao=removeritem&produto=${comprovante.produto.codProdutos}&id=${id}&qtd=1&teste=1" class="waves-effect waves-light btn" style="border-radius: 50px; background: #ef5350;">-</a></td> --%>							
+
+							<td style="width: 10%"><a href="ServletComanda?acao=adicionaritem&produto=${itens.produtos.codProdutos}&id=${id}&qtd=1&teste=1" class="waves-effect waves-light btn" style="border-radius: 50px">+</a></td>
+							<td style="width: 10%"><a href="ServletComanda?acao=removeritem&produto=${itens.produtos.codProdutos}&id=${id}&qtd=1&idItem=${itens.codItem}" class="waves-effect waves-light btn" style="border-radius: 50px; background: #ef5350;">-</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
