@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 
 <!-- Referenciar os ManagedBeans -->
-<jsp:useBean class="br.com.comanda.managedbeans.ManagedBeanComanda"	id="mb"></jsp:useBean>
+<jsp:useBean class="br.com.comanda.managedbeans.ManagedBeanComanda"
+	id="mb"></jsp:useBean>
 
 <!-- TagLibraries (JSTL) -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -32,11 +33,23 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+	
+	  <!-- CORE CSS-->
+  <link href="css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection">
+  <link href="css/style.min.css" type="text/css" rel="stylesheet" media="screen,projection">
+  <!-- Custome CSS-->    
+  <link href="css/custom/custom.min.css" type="text/css" rel="stylesheet" media="screen,projection">
+
+  <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
+  <link href="js/plugins/prism/prism.css" type="text/css" rel="stylesheet" media="screen,projection">
+  <link href="js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet" media="screen,projection">
+  <link href="js/plugins/chartist-js/chartist.min.css" type="text/css" rel="stylesheet" media="screen,projection">
+  <link href="js/plugins/jquery.nestable/nestable.css" type="text/css" rel="stylesheet" media="screen,projection">
 
 </head>
 <body>
 
-	<jsp:include page="menu.jsp"></jsp:include>	
-		
+	<jsp:include page="menu.jsp"></jsp:include>
+
 </body>
 </html>

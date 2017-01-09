@@ -28,6 +28,7 @@
 <!-- Compiled and minified JavaScript -->
 <script type="text/javascript" src="//code.jquery.com/jquery-2.1.4.js"></script>
 <style type="text/css"></style>
+
 <link rel="stylesheet" type="text/css"
 	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
 <script type="text/javascript"
@@ -37,7 +38,6 @@
 <body>
 
 	<jsp:include page="menu.jsp"></jsp:include>	
-	
 	
 	<div class="container">
 		<h2>Comandas abertas</h2>
@@ -66,6 +66,5 @@
 			</tbody>
 		</table>
 	</div>
-	
 </body>
 </html>

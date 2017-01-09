@@ -211,31 +211,39 @@ public class ControleComanda extends HttpServlet {
 					Integer idComanda = Integer.parseInt(request.getParameter("id"));
 					Float valor = Float.valueOf(request.getParameter("valor").replaceAll(",", "."));
 					String observacoes = request.getParameter("obeservacao");
-
+					
 					ComandaDAO comandaDAO = new ComandaDAO();
-
-					Pagamento pagamento = new Pagamento();
-					pagamento.setComanda(comandaDAO.findById(idComanda));
-					pagamento.setValorPagamento(valor);
-					pagamento.setObservacaoPagamento(observacoes);
-
-					PagamentoDAO pagamentoDAO = new PagamentoDAO();
-					ItemComandaDAO itemComandaDAO = new ItemComandaDAO();
-					pagamentoDAO.efetuarPagamento(pagamento);
-
 					Comanda comanda = comandaDAO.findById(idComanda);
+					Pagamento pagamento = new Pagamento();
+					ItemComandaDAO itemComandaDAO = new ItemComandaDAO();
+					PagamentoDAO pagamentoDAO = new PagamentoDAO();
 					List<Pagamento> listPagamentos = pagamentoDAO.findByComanda(idComanda);
 					List<ItemComanda> listItemComanda = itemComandaDAO.findById(idComanda);
-
 					comanda.setListPagamento(listPagamentos);
 					comanda.setListItemComanda(listItemComanda);
-
+					
+					
+					if(comanda.getValorAPagar() >= valor){						
+						pagamento.setComanda(comandaDAO.findById(idComanda));
+						pagamento.setValorPagamento(valor);
+						pagamento.setObservacaoPagamento(observacoes);					
+						pagamentoDAO.efetuarPagamento(pagamento);
+						
+						request.setAttribute("mensagem", "1");
+						listPagamentos = pagamentoDAO.findByComanda(idComanda);
+						listItemComanda = itemComandaDAO.findById(idComanda);
+						comanda.setListPagamento(listPagamentos);
+						comanda.setListItemComanda(listItemComanda);
+						
+					} else {
+						request.setAttribute("mensagem2", "0");	
+					}
+					
 					request.setAttribute("comanda", comanda);
 					request.setAttribute("id", idComanda);
-					request.setAttribute("mensagem", "Pagamento efetuado");
 
 				} catch (Exception e) {
-					request.setAttribute("mensagem2", "OPS! Ocorreu um erro");					
+					request.setAttribute("mensagem2", "0");					
 					
 				} finally {
 					request.getRequestDispatcher("detalhecomanda.jsp").forward(request, response);

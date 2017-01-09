@@ -52,6 +52,7 @@
 	</script>
 
 	<div class="chip">Comanda: ${id}</div>${mensagem}
+	${mensagem2}
 	<!-- Dropdown Trigger -->
 
 	<a class='dropdown-button btn' href='#' data-activates='dropdown1'
@@ -72,17 +73,19 @@
 	<!-- 							MODAL EFETUAR PAGAMENTOS -->
 	<form class="col s12" name="formulario" method="post"
 		action="ServletComanda?acao=efetuarpagamento&id=${id}">
-		<div class="modal" id="modaldetalhes" style="width: 300px; border-radius: 10px; margin: auto; text-align: center;">
+		<div class="modal" id="modaldetalhes"
+			style="width: 300px; border-radius: 0px; margin: auto; text-align: center;">
 			<div class="modal-content">
 				<h5>Valor a ser pago</h5>
 			</div>
 			<div class="modal-footer">
 				<div class="input-field col s6" style="width: 200px; margin: auto;">
 					<input id="valor" type="text" class="validate" name="valor"
-						required> <label class="active" for="first_name2" style="text-align: left;">Valor</label>
+						required> <label class="active" for="first_name2"
+						style="text-align: left;">Valor</label>
 				</div>
 			</div>
-				<br/>
+			<br />
 			<div class="modal-footer">
 				<div class="input-field col s6" style="width: 200px; margin: auto;">
 					<input id="obeservacao" type="text" class="validate"
@@ -92,23 +95,25 @@
 			</div>
 			<br /> <input type="submit" class="waves-effect waves-light btn"
 				value="Efetuar pagamento"
-				style="border-radius: 50px; margin: auto; margin-bottom: 5px; text-align: center;" />
+				style="border-radius: 10px; margin: auto; margin-bottom: 10px; text-align: center;" />
 		</div>
 	</form>
 
 	<!-- MODAL DETALHES DE PAGAMENTO -->
 	<div class="modal" id="modalpagamento"
-		style="width: 450px; height: 600px; border-radius: 30px;">
+		style="width: 450px; height: 600px; border-radius: 10px;">
 		<div class="modal-content">
 			<div style="text-align: center;">
 				<h5>Comanda WEB</h5>
 				<h6>Cupon Fiscal</h6>
 				<br />
-				<h6>------------------- Histórico de pagamentos --------------------</h6>
+				<h6>------------------- Histórico de pagamentos
+					--------------------</h6>
 			</div>
 		</div>
 		<div class="modal-footer">
-			<table class="table table-hover highlight responsive-table bordered" id="dataTables-example" style="text-align: center;">
+			<table class="table table-hover highlight responsive-table bordered"
+				id="dataTables-example" style="text-align: center;">
 				<thead>
 					<tr>
 						<th>Quem pagou?</th>
@@ -124,17 +129,14 @@
 					</c:forEach>
 				</tbody>
 			</table>
-			<div style="margin: auto;"> 
-			<p style="color: green;">Valor pago: R$ ${comanda.valorPago}</p>
-			<p style="color: red;">Valor á pagar: R$ ${comanda.valorAPagar}</p>
-			<p>Valor total: R$ ${comanda.valorTotal}</p>
+			<div style="margin: auto;">
+				<p style="color: green;">Valor pago: R$ ${comanda.valorPago}</p>
+				<p style="color: red;">Valor á pagar: R$ ${comanda.valorAPagar}</p>
+				<p>Valor total: R$ ${comanda.valorTotal}</p>
 			</div>
 		</div>
 		<br />
 	</div>
-
-
-
 
 
 
@@ -164,8 +166,13 @@
 							<td>${itens.produtos.observacoes}</td>
 							<td>${itens.produtos.preco}</td>
 
-							<td style="width: 10%"><a href="ServletComanda?acao=adicionaritem&produto=${itens.produtos.codProdutos}&id=${id}&qtd=1&teste=1" class="waves-effect waves-light btn" style="border-radius: 50px">+</a></td>
-							<td style="width: 10%"><a href="ServletComanda?acao=removeritem&produto=${itens.produtos.codProdutos}&id=${id}&qtd=1&idItem=${itens.codItem}" class="waves-effect waves-light btn" style="border-radius: 50px; background: #ef5350;">-</a></td>
+							<td style="width: 10%"><a
+								href="ServletComanda?acao=adicionaritem&produto=${itens.produtos.codProdutos}&id=${id}&qtd=1&teste=1"
+								class="waves-effect waves-light btn" style="border-radius: 50px">+</a></td>
+							<td style="width: 10%"><a
+								href="ServletComanda?acao=removeritem&produto=${itens.produtos.codProdutos}&id=${id}&qtd=1&idItem=${itens.codItem}"
+								class="waves-effect waves-light btn"
+								style="border-radius: 50px; background: #ef5350;">-</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -173,5 +180,13 @@
 		</div>
 	</div>
 
+	<c:if test="${mensagem2 == '0'}">
+
+	</c:if>
+
+	<c:if test="${mensagem == '1'}">
+		
+	</c:if>
+	
 </body>
 </html>
