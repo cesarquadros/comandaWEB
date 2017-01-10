@@ -16,6 +16,7 @@
 <head>
 <title>Controle de Comandas</title>
 
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -34,8 +35,28 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+	
+	
+	<script type="text/javascript" src="js/funcoes.js"></script>
 
+<!-- CORE CSS-->
+<link href="css/materialize.min.css" type="text/css" rel="stylesheet"
+	media="screen,projection">
+<link href="css/style.min.css" type="text/css" rel="stylesheet"
+	media="screen,projection">
+<!-- Custome CSS-->
+<link href="css/custom/custom.min.css" type="text/css" rel="stylesheet"
+	media="screen,projection">
 
+<!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
+<link href="css/prism.css" type="text/css" rel="stylesheet"
+	media="screen,projection">
+<link href="js/plugins/perfect-scrollbar/perfect-scrollbar.css"
+	type="text/css" rel="stylesheet" media="screen,projection">
+<link href="js/plugins/chartist-js/chartist.min.css" type="text/css"
+	rel="stylesheet" media="screen,projection">
+<link href="css/nestable.css" type="text/css"
+	rel="stylesheet" media="screen,projection">
 
 </head>
 <body style="padding: 0px;">
@@ -51,9 +72,10 @@
 		}
 	</script>
 
-	<div class="chip">Comanda: ${id}</div>${mensagem}
-	${mensagem2}
-	<!-- Dropdown Trigger -->
+	<div class="chip">Comanda: ${id}</div>
+
+
+	<!-- ------------------------------------------- Drop down ----------------------------------------------------->
 
 	<a class='dropdown-button btn' href='#' data-activates='dropdown1'
 		style="border-radius: 50px; float: right; margin-right: 5px; margin-top: 5px;">Opções
@@ -68,21 +90,48 @@
 		<li class="divider"></li>
 		<li><a href="#!" class="modal-trigger">Fechar comanda</a></li>
 	</ul>
+	<!-- ------------------------------------------- FIM Drop down ----------------------------------------------------->
+
+	<!-- ------------------------------------------- ALERTS ----------------------------------------------------->
+	<c:if test="${teste == '0'}">
+		<div id="card-alert" class="card red" style="width: 90%; margin: auto; margin-top: 15px;">
+			<div class="card-content white-text">
+				<p>ERRO : ${mensagem}</p>
+			</div>
+			<button type="button" class="close white-text" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true" id="fecharalert">×</span>
+			</button>
+		</div>
+	</c:if>
+
+	<c:if test="${teste == '1'}">
+		<div id="card-alert" class="card green" style="width: 90%; margin: auto; margin-top: 15px;">
+			<div class="card-content white-text">
+				<p>SUCESSO : ${mensagem}.</p>
+			</div>
+			<button type="button" class="close white-text" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true" id="fecharalert">×</span>
+			</button>
+		</div>
+	</c:if>
+	<!-- ------------------------------------------- FIM ALERTS ----------------------------------------------------->
 
 
-	<!-- 							MODAL EFETUAR PAGAMENTOS -->
+	<!-- ------------------------------------------- MODAL EFETUAR PAGAMENTOS ----------------------------------------------------->
 	<form class="col s12" name="formulario" method="post"
 		action="ServletComanda?acao=efetuarpagamento&id=${id}">
 		<div class="modal" id="modaldetalhes"
 			style="width: 300px; border-radius: 0px; margin: auto; text-align: center;">
 			<div class="modal-content">
-				<h5>Valor a ser pago</h5>
+				<h5>Valor a pagar: R$ ${comanda.valorTotal}</h5>
 			</div>
 			<div class="modal-footer">
 				<div class="input-field col s6" style="width: 200px; margin: auto;">
 					<input id="valor" type="text" class="validate" name="valor"
 						required> <label class="active" for="first_name2"
-						style="text-align: left;">Valor</label>
+						style="text-align: left;">Valor a ser pago</label>
 				</div>
 			</div>
 			<br />
@@ -98,8 +147,9 @@
 				style="border-radius: 10px; margin: auto; margin-bottom: 10px; text-align: center;" />
 		</div>
 	</form>
+	<!-- ------------------------------------------- FIM MODAL EFETUAR PAGAMENTOS ----------------------------------------------------->
 
-	<!-- MODAL DETALHES DE PAGAMENTO -->
+	<!-- ------------------------------------------- MODAL DETALHES DE PAGAMENTOS ----------------------------------------------------->
 	<div class="modal" id="modalpagamento"
 		style="width: 450px; height: 600px; border-radius: 10px;">
 		<div class="modal-content">
@@ -137,7 +187,7 @@
 		</div>
 		<br />
 	</div>
-
+	<!-- ------------------------------------------- FIM MODAL DETALHES DE PAGAMENTOS ----------------------------------------------------->
 
 
 	<h2 style="margin: auto; text-align: center; font-family: serif;">Detalhes
@@ -180,13 +230,7 @@
 		</div>
 	</div>
 
-	<c:if test="${mensagem2 == '0'}">
 
-	</c:if>
 
-	<c:if test="${mensagem == '1'}">
-		
-	</c:if>
-	
 </body>
 </html>

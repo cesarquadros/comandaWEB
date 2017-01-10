@@ -229,21 +229,23 @@ public class ControleComanda extends HttpServlet {
 						pagamento.setObservacaoPagamento(observacoes);					
 						pagamentoDAO.efetuarPagamento(pagamento);
 						
-						request.setAttribute("mensagem", "1");
+						request.setAttribute("mensagem", "Pagamento efetuado");
+						request.setAttribute("teste", "1");
 						listPagamentos = pagamentoDAO.findByComanda(idComanda);
 						listItemComanda = itemComandaDAO.findById(idComanda);
 						comanda.setListPagamento(listPagamentos);
 						comanda.setListItemComanda(listItemComanda);
 						
 					} else {
-						request.setAttribute("mensagem2", "0");	
+						request.setAttribute("mensagem", "Valor é maior que o total da comanda");
+						request.setAttribute("teste", "0");
 					}
 					
 					request.setAttribute("comanda", comanda);
 					request.setAttribute("id", idComanda);
 
 				} catch (Exception e) {
-					request.setAttribute("mensagem2", "0");					
+					request.setAttribute("mensagem", e);					
 					
 				} finally {
 					request.getRequestDispatcher("detalhecomanda.jsp").forward(request, response);
